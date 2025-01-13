@@ -9,7 +9,7 @@
 ### Resources:
 * API Resource:  [themoviedb.org](https://developer.themoviedb.org/reference/intro/getting-started)
 
-* Used APIs: [TMDB Movie Discovery](https://speeding-astronaut-900111.postman.co/workspace/New-Team-Workspace~e1e6b8a3-6b53-400d-be3c-78370d2d39f9/request/26656194-c7a5dd97-a4a9-4853-8243-7b424d5c532f?action=share&creator=26656194&ctx=documentation)
+* Used APIs: [TMDB Movie Discovery](https://speeding-astronaut-900111.postman.co/workspace/4eaa6ecc-4358-46f7-90ad-f034ccc16295/documentation/26656194-3877c5aa-6c86-49bf-87aa-46552454a95a)
 
 * Inspired from the design:  [Movies discovery mobile app (ytsXmovies) (Community)](https://www.figma.com/design/Lpx27TcthaJlnmf4PL0gK5/Movies-discovery-mobile-app-(ytsXmovies)-(Community)?node-id=0-1&p=f&t=bP9ug2Wh0AZ3RQjo-0)
 
