@@ -17,6 +17,12 @@ enum Title : String{
     case popular = "https://api.themoviedb.org/3/movie/popular"
     case topRated = "https://api.themoviedb.org/3/movie/top_rated"
     case upcoming = "https://api.themoviedb.org/3/movie/upcoming"
+    
+    case airingTodaySeries = "https://api.themoviedb.org/3/tv/airing_today"
+    case onTheAirSeries = "https://api.themoviedb.org/3/tv/on_the_air"
+    case popularSeries = "https://api.themoviedb.org/3/tv/popular"
+    case topRatedSeries = "https://api.themoviedb.org/3/tv/top_rated"
+    
 }
 
 class HomeService{
@@ -55,12 +61,41 @@ class HomeService{
                     
                 }catch{
                     completion(.failure(error))
+                }
+            }else{
+                completion(.failure(ErrorTypes.unknownError))
+            }
+        }.resume()
+    }
+    
+    static func fetchSeries(title : Title, page: Int, completion : @escaping (Result<[Series],Error>) -> () ){
+        
+        // v3 Auth Authentication type api_key is given as a parameter.
+        guard let url = URL(string: "\(title.rawValue)?api_key=\(apiKey)&page=\(page)") else{
+            completion(.failure(ErrorTypes.URLError))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let error = error{
+                completion(.failure(error))
+            }else if let data = data{
+                do{
+                    let container = try JSONDecoder().decode(SeriesContainer.self, from: data)
+                    let series = container.results
+                    completion(.success(series))
+                }catch{
                     
                 }
             }else{
                 completion(.failure(ErrorTypes.unknownError))
             }
         }.resume()
+        
     }
     
    

@@ -27,9 +27,14 @@ class WideMovieCell: UICollectionViewCell {
         
         saveMovieButton.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
         
-        let imageGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        let imageLongPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(imageLongPressed(_:)))
+        imageLongPressGesture.minimumPressDuration = 0.4
+        
+        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        
         movieImage.isUserInteractionEnabled = true
-        movieImage.addGestureRecognizer(imageGesture)
+        movieImage.addGestureRecognizer(imageTapGesture)
+        movieImage.addGestureRecognizer(imageLongPressGesture)
         
         ratingStars.settings.fillMode = .precise
         
@@ -42,8 +47,19 @@ class WideMovieCell: UICollectionViewCell {
         print("bookmark tapped")
     }
 
+    @objc private func imageLongPressed(_ longpress: UILongPressGestureRecognizer){
+        switch longpress.state{
+        case .began:
+            movieImage.alpha = 0.5
+        case .changed, .ended, .cancelled, .failed:
+            movieImage.alpha = 1.0
+        default:
+            break
+        }
+    }
+    
     @objc private func imageTapped(){
-        print("image tapped")
+        print("Tapped")
     }
     
     private func indicatorConstraints(){
