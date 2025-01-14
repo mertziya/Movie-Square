@@ -34,6 +34,12 @@ class TabVC : UITabBarController{
         
         self.viewControllers = [homeScreenNav , discover , movieSearchVC, accountVCNav]
         self.tabBar.tintColor = .systemYellow
+        
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = .systemBackground.withAlphaComponent(0.85)
+        
+        tabBar.scrollEdgeAppearance = appearance
+        tabBar.standardAppearance = appearance
     }
     
 }

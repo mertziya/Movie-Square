@@ -9,27 +9,35 @@ import Foundation
 import UIKit
 
 
-
 class HomeScreenVC : UIViewController, PageDelegate{
     
     // Properties:
     let homeScreenView = HomeScreenView()
     var isMoviesPresenting = true
     
+ 
+    
     // Lifecycles:
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(showDetailsVC(_:)), name: .imageTappedNotification, object: nil)
         
         view = homeScreenView
         homeScreenView.tableView.delegate = self
         homeScreenView.tableView.dataSource = self
         homeScreenView.tableView.register(UINib(nibName: "WideMovieCellContainer", bundle: nil), forCellReuseIdentifier: "WideMovieCellContainer")
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // Navigation Bar Configuration is set here.
         setupNav()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self , name: .imageTappedNotification , object: nil)
     }
     
     // Delegates:
@@ -39,6 +47,20 @@ class HomeScreenVC : UIViewController, PageDelegate{
         }else{
             updateAndReloadTargetCellTVSeries(title: selectedTitle!, page: selectedPage!, selectedRow: row! , sectionHeading: selectedHeading)
         }
+    }
+    
+    @objc private func showDetailsVC(_ notification : Notification){
+        let vc = DetailVC()
+        if let userInfo = notification.userInfo as? [String : Movie] {
+            guard let movie = userInfo["data"] else{return}
+            vc.selectedMovie = movie
+            vc.isMovieSelected = true
+        }else if let userInfo = notification.userInfo as? [String : Series]{
+            guard let series = userInfo["data"] else{return}
+            vc.selectedSeries = series
+            vc.isMovieSelected = false
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -124,11 +146,10 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF MOVIES
+    // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF *** MOVIES ***
     func updateAndReloadTargetCell(title: Title , page : Int , selectedRow: Int, sectionHeading : String?) {
         // Update your data source
         guard let targetCell = self.homeScreenView.tableView.cellForRow(at: IndexPath(row: selectedRow, section: 0)) as? WideMovieCellContainer else {
-            print("ERROR")
             return
         }
         targetCell.selectedRow = selectedRow
@@ -152,11 +173,10 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF TV SERIES
+    // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF  *** TV SERIES ***
     func updateAndReloadTargetCellTVSeries(title: Title , page : Int , selectedRow: Int, sectionHeading : String?) {
         // Update your data source
         guard let targetCell = self.homeScreenView.tableView.cellForRow(at: IndexPath(row: selectedRow, section: 0)) as? WideMovieCellContainer else {
-            print("ERROR")
             return
         }
         targetCell.selectedRow = selectedRow
@@ -191,25 +211,22 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
 extension HomeScreenVC{
     private func setupNav(){
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemBackground
+        appearance.backgroundColor = .systemBackground.withAlphaComponent(0.85)
+        
         navigationController?.navigationBar.standardAppearance = appearance
         
         
         
         let button = UIButton(type: .system)
-        button.setTitle("Movies", for: .normal)
+        button.setTitle("  Movies", for: .normal)
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.setTitleColor(.label, for: .normal)
 
         // Adjust font and tint color
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         button.tintColor = .systemYellow
-
-        // Flip the image to the right of the text
-        button.semanticContentAttribute = .forceRightToLeft
         
-        // Adjust spacing between text and image
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+        
         
         setupDropdown(button: button)
 
@@ -221,29 +238,30 @@ extension HomeScreenVC{
     private func setupDropdown(button : UIButton){
         let action1 = UIAction(title: "Movies") { _ in
             if !self.isMoviesPresenting{
-                print("Present Movies")
+                button.setTitle("  Movies", for: .normal)
+                self.isMoviesPresenting = true
+                
                 self.updateAndReloadTargetCell(title: .nowPlaying, page: 1, selectedRow: 0, sectionHeading: "Now Playing")
                 self.updateAndReloadTargetCell(title: .popular, page: 1, selectedRow: 1, sectionHeading: "Popular")
                 self.updateAndReloadTargetCell(title: .topRated, page: 1, selectedRow: 2, sectionHeading: "Top Rated")
                 self.updateAndReloadTargetCell(title: .upcoming, page: 1, selectedRow: 3, sectionHeading: "Upcoming")
                 
-                button.setTitle("Movies", for: .normal)
-                self.isMoviesPresenting = true
+                
             }
         }
         let action2 = UIAction(title: "TV Series") { _ in
             if self.isMoviesPresenting{
-                print("Present TV Series")
+                button.setTitle("  Series", for: .normal)
+                self.isMoviesPresenting = false
+                
                 self.updateAndReloadTargetCellTVSeries(title: .onTheAirSeries, page: 1, selectedRow: 0, sectionHeading: "On The Air")
                 self.updateAndReloadTargetCellTVSeries(title: .airingTodaySeries, page: 1, selectedRow: 1, sectionHeading: "Airing Today")
                 self.updateAndReloadTargetCellTVSeries(title: .topRatedSeries, page: 1, selectedRow: 2, sectionHeading: "Top Rated")
                 self.updateAndReloadTargetCellTVSeries(title: .popularSeries, page: 1, selectedRow: 3, sectionHeading: "Popular")
                
-                button.setTitle("Series", for: .normal)
-                self.isMoviesPresenting = false
+                
             }
         }
-        
         let menu = UIMenu(children: [action1, action2])
         
         button.menu = menu

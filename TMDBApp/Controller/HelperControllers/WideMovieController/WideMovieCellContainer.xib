@@ -51,31 +51,33 @@
                             <constraint firstAttribute="height" constant="1" id="s1D-uu-Caw"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="1JE-bH-gbh">
-                        <rect key="frame" x="512.33333333333337" y="74.666666666666671" width="80.666666666666629" height="34.333333333333329"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1JE-bH-gbh">
+                        <rect key="frame" x="474.66666666666669" y="74.666666666666671" width="118.33333333333331" height="34.333333333333329"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3S-zB-M3z">
-                                <rect key="frame" x="0.0" y="0.0" width="35.333333333333336" height="34.333333333333336"/>
+                                <rect key="frame" x="0.0" y="0.0" width="38.333333333333336" height="34.333333333333336"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemFillColor"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="chevron.left" catalog="system" symbolScale="small"/>
+                                    <imageReference key="image" image="chevron.left" catalog="system" symbolScale="medium"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="black"/>
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3O-dt-EEe">
-                                <rect key="frame" x="36.333333333333258" y="0.0" width="8" height="34.333333333333336"/>
+                                <rect key="frame" x="54.333333333333314" y="0.0" width="9.6666666666666643" height="34.333333333333336"/>
                                 <color key="tintColor" name="AccentColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQA-e3-lRn">
-                                <rect key="frame" x="45.333333333333258" y="0.0" width="35.333333333333343" height="34.333333333333336"/>
+                                <rect key="frame" x="79.999999999999943" y="0.0" width="38.333333333333343" height="34.333333333333336"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemFillColor"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="chevron.right" catalog="system" symbolScale="small"/>
+                                    <imageReference key="image" image="chevron.right" catalog="system" symbolScale="medium"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="black"/>
                                 </buttonConfiguration>
                             </button>
@@ -118,13 +120,16 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="separatorColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemFillColor">
+            <color red="0.46274509803921571" green="0.46274509803921571" blue="0.50196078431372548" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

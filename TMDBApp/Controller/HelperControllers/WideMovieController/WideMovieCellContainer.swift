@@ -13,6 +13,7 @@ protocol PageDelegate : AnyObject{
 
 class WideMovieCellContainer: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
+    
     // MARK: - Properties:
     lazy var moviesToShow : [Movie] = []{
         didSet{
@@ -84,35 +85,35 @@ extension WideMovieCellContainer{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let title : String?
-        let averageVote : Double?
-        let backdropPath : String?
-        if isShowingMovies{
-            title = moviesToShow[indexPath.row].title
-            averageVote = moviesToShow[indexPath.row].vote_average
-            backdropPath = moviesToShow[indexPath.row].backdrop_path
-        } else {
-            title = seriesToShow[indexPath.row].name
-            averageVote = seriesToShow[indexPath.row].vote_average
-            backdropPath = seriesToShow[indexPath.row].backdrop_path
-        }
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WideMovieCell", for: indexPath) as? WideMovieCell else{
             print("DEBUG: Now playing Dequeue Error")
             return UICollectionViewCell()
         }
-        
-        
-        DispatchQueue.main.async {
-            cell.movieName.text = title
+
+        let title : String?
+        let averageVote : Double?
+        let backdropPath : String?
+        if isShowingMovies{
+            cell.selectedMovie = moviesToShow[indexPath.row]
+            cell.isMovieSelected = true
+            
+            title = moviesToShow[indexPath.row].title
+            averageVote = moviesToShow[indexPath.row].vote_average
+            backdropPath = moviesToShow[indexPath.row].backdrop_path
+        } else {
+            cell.selectedSeries = seriesToShow[indexPath.row]
+            cell.isMovieSelected = false
+            
+            title = seriesToShow[indexPath.row].name
+            averageVote = seriesToShow[indexPath.row].vote_average
+            backdropPath = seriesToShow[indexPath.row].backdrop_path
         }
-    
         
-        // Since there is 5 stars, and all vote_avatage is evaluated up to 10 points the score is divided by 2.
-        cell.movieRating.text = String(format: "%.1f", (averageVote ?? 0) / 2)
-        cell.ratingStars.rating = ((averageVote ?? 0) / 2)
         
+        
+        
+        // All the cell data is shown after the image is uploaded
         if let unwrapped_poster_path = backdropPath{
             cell.movieImage.image = UIImage.solidGray
             cell.indicator.startAnimating()
@@ -120,6 +121,12 @@ extension WideMovieCellContainer{
                 DispatchQueue.main.async {
                     cell.indicator.stopAnimating()
                     cell.movieImage.image = poster
+                    cell.movieName.text = title
+                    
+                    // Since there is 5 stars, and all vote_avatage is evaluated up to 10 points the score is divided by 2.
+                    cell.movieRating.text = String(format: "%.1f", (averageVote ?? 0) / 2)
+                    cell.ratingStars.rating = ((averageVote ?? 0) / 2)
+
                 }
             }
         }else{
@@ -155,12 +162,16 @@ extension WideMovieCellContainer{
             bgView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
             bgView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
         ])
+        
+        previousPage.layer.cornerRadius = previousPage.bounds.width / 2
+        nextPage.layer.cornerRadius = nextPage.bounds.width / 2
     }
 }
 
 
 // MARK: - Actions:
-extension WideMovieCellContainer{
+extension WideMovieCellContainer {
+    
     private func previousPageAction(){
         previousPage.addTarget(self, action: #selector(previousPageTapped), for: .touchUpInside)
     }

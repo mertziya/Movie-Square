@@ -8,8 +8,16 @@
 import UIKit
 import Cosmos
 
-class WideMovieCell: UICollectionViewCell {
 
+class WideMovieCell: UICollectionViewCell {
+    
+    // MARK: - Properties:
+    var selectedMovie : Movie?
+    var selectedSeries : Series?
+    var isMovieSelected = true
+    
+    
+    // MARK: - UI Configurations:
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var movieRating: UILabel!
@@ -17,6 +25,8 @@ class WideMovieCell: UICollectionViewCell {
     @IBOutlet weak var ratingStars: CosmosView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
+    
+    // MARK: - Lifecycles:
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,6 +51,7 @@ class WideMovieCell: UICollectionViewCell {
         
         
         indicatorConstraints()
+        
     }
     
     @objc private func bookmarkTapped(){
@@ -53,14 +64,28 @@ class WideMovieCell: UICollectionViewCell {
             movieImage.alpha = 0.5
         case .changed, .ended, .cancelled, .failed:
             movieImage.alpha = 1.0
+            if isMovieSelected{
+                guard let selectedMovie = selectedMovie else{return}
+                NotificationCenter.default.post(name: .imageTappedNotification, object: nil, userInfo: ["data" : selectedMovie])
+            }else{
+                guard let selectedSeries = selectedSeries else{return}
+                NotificationCenter.default.post(name: .imageTappedNotification, object: nil, userInfo: ["data" : selectedSeries])
+            }
         default:
             break
         }
     }
     
     @objc private func imageTapped(){
-        print("Tapped")
+        if isMovieSelected{
+            guard let selectedMovie = selectedMovie else{return}
+            NotificationCenter.default.post(name: .imageTappedNotification, object: nil, userInfo: ["data" : selectedMovie])
+        }else{
+            guard let selectedSeries = selectedSeries else{return}
+            NotificationCenter.default.post(name: .imageTappedNotification, object: nil, userInfo: ["data" : selectedSeries])
+        }
     }
+    
     
     private func indicatorConstraints(){
         indicator.startAnimating()
