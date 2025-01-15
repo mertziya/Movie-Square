@@ -19,6 +19,10 @@ class WideMovieCellContainer: UITableViewCell, UICollectionViewDataSource, UICol
         didSet{
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                
+                // Calculate the desired pixel offset
+                let customOffset = CGPoint(x: 0, y: 0) // Adjust 'x' for horizontal offset in pixels
+                self.collectionView.setContentOffset(customOffset, animated: true)
             }
         }
     }
@@ -26,6 +30,10 @@ class WideMovieCellContainer: UITableViewCell, UICollectionViewDataSource, UICol
         didSet{
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                
+                // Calculate the desired pixel offset
+                let customOffset = CGPoint(x: 0, y: 0) // Adjust 'x' for horizontal offset in pixels
+                self.collectionView.setContentOffset(customOffset, animated: true)
             }
         }
     }

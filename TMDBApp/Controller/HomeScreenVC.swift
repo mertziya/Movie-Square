@@ -80,7 +80,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         
         if indexPath.row == 0{
-            HomeService.fetchMovies(title: .nowPlaying, page: 1) { result in
+            MovieService.fetchMovies(title: .nowPlaying, page: 1) { result in
                 switch result{
                 case .failure(let error):       print(error.localizedDescription)
                 case .success(let movies):      cell.moviesToShow = movies
@@ -95,7 +95,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         if indexPath.row == 1{
-            HomeService.fetchMovies(title: .popular, page: 1) { result in
+            MovieService.fetchMovies(title: .popular, page: 1) { result in
                 switch result{
                 case .failure(let error):       print(error.localizedDescription)
                 case .success(let movies):      cell.moviesToShow = movies
@@ -109,7 +109,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         if indexPath.row == 2{
-            HomeService.fetchMovies(title: .topRated, page: 1) { result in
+            MovieService.fetchMovies(title: .topRated, page: 1) { result in
                 switch result{
                 case .failure(let error):       print(error.localizedDescription)
                 case .success(let movies):
@@ -125,7 +125,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         if indexPath.row == 3{
-            HomeService.fetchMovies(title: .upcoming, page: 1) { result in
+            MovieService.fetchMovies(title: .upcoming, page: 1) { result in
                 switch result{
                 case .failure(let error):       print(error.localizedDescription)
                 case .success(let movies):      cell.moviesToShow = movies;
@@ -162,7 +162,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         targetCell.isShowingMovies = true
 
         
-        HomeService.fetchMovies(title: title, page: page) { result in
+        MovieService.fetchMovies(title: title, page: page) { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -189,7 +189,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         targetCell.isShowingMovies = false
 
         
-        HomeService.fetchSeries(title: title, page: page) { result in
+        TVService.fetchSeries(title: title, page: page) { result in
             switch result{
             case .failure(let error):
                 print(error.localizedDescription)

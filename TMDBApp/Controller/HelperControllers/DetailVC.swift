@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 import Cosmos
 
 class DetailVC: UIViewController {
@@ -16,6 +17,7 @@ class DetailVC: UIViewController {
     
     
     // MARK: - UI Elements:
+    
     @IBAction func backButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
@@ -29,11 +31,13 @@ class DetailVC: UIViewController {
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var detailsDescription: UILabel!
     @IBOutlet weak var genres: UILabel!
+    @IBOutlet weak var mainTitle: UILabel!
     
     
     @IBOutlet weak var ratingValue: UILabel!
     @IBOutlet weak var ratingView: CosmosView!
     
+    @IBOutlet weak var playButton: UIButton!
     
     
     // MARK: - Lifecycles:
@@ -45,7 +49,8 @@ class DetailVC: UIViewController {
         
         setupUI() // For extra UI Configurations that couldn't be handled with XIB File
         
-        fetchBackgroundImage() // Fetches the image that is coming from the data.
+        setupUIData() // uploads the data that is responded to the Series or Movies model inside this class.
+        
     }
     
     // Gives a gradient background to the image view.
@@ -68,15 +73,7 @@ class DetailVC: UIViewController {
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }
 
@@ -92,9 +89,17 @@ extension DetailVC{
         ratingView.backgroundColor = .systemBackground
         ratingView.settings.fillMode = .precise
         
+        playButton.alpha = 0.25
+        playButton.addTarget(self, action: #selector(openWeb), for: .touchUpInside)
+        
         
         // Removes the left bar button item of the navigation controller since another design will be used [According to the design resource]
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
+        
+        let swipeToExit = UISwipeGestureRecognizer(target: self, action: #selector(viewDidSwipteToRight(_:)))
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(swipeToExit)
+        
     }
     
     @objc private func buttonTouchDown(){
@@ -103,6 +108,58 @@ extension DetailVC{
     @objc private func buttonTouchUp(){
         downloadButton.alpha = 1.0 // Normal State
     }
+    
+    @objc private func viewDidSwipteToRight(_ gesture : UISwipeGestureRecognizer){
+        gesture.direction = .right
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func openWeb(){
+        guard let selectedMovie = selectedMovie else{return}
+
+        let webVC = UIViewController()
+        webVC.view.backgroundColor = .systemBackground
+        
+        let webView = WKWebView(frame: webVC.view.bounds)
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        webVC.view.addSubview(webView)
+        
+        if isMovieSelected{
+            MovieService.fetchVideoURLOfMovie(movie: selectedMovie) { result in
+                switch result{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let url):
+                    DispatchQueue.main.async {
+                        webView.load(URLRequest(url: url))
+                        self.present(webVC,animated: true)
+                    }
+                }
+            }
+        } else{
+            print("Do the same logic for series")
+        }
+        
+        
+    }
+    
+    private func setupUIData(){
+        
+        fetchBackgroundImage() // Fetches the image that is coming from the data.
+
+        detailsDescription.text = isMovieSelected ? selectedMovie?.overview : selectedSeries?.overview
+        
+        let avgRating = isMovieSelected ? selectedMovie?.vote_average ?? 0 : selectedSeries?.vote_average ?? 0
+        ratingValue.text = String(format: "%.1f", (avgRating / 2.0))
+        
+        ratingView.rating = avgRating / 2.0
+        
+        mainTitle.text = isMovieSelected ? selectedMovie?.title : selectedSeries?.name
+        
+        setupGenres()
+        
+    }
+    
 }
 
 
@@ -116,11 +173,16 @@ extension DetailVC{
         
         imageUploadIndicator.translatesAutoresizingMaskIntoConstraints = false
         imageToShow.translatesAutoresizingMaskIntoConstraints = false
+        playButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageUploadIndicator.centerXAnchor.constraint(equalTo: imageToShow.centerXAnchor),
             imageUploadIndicator.centerYAnchor.constraint(equalTo: imageToShow.centerYAnchor),
             
-            imageToShow.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.68)
+            imageToShow.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.68),
+            
+            playButton.centerXAnchor.constraint(equalTo: imageToShow.centerXAnchor),
+            playButton.centerYAnchor.constraint(equalTo: imageToShow.centerYAnchor),
+            
         ])
     }
 }
@@ -129,6 +191,8 @@ extension DetailVC{
 
 // MARK: - Network Calls:
 extension DetailVC{
+    
+    // sets the background image after fetching the image is completed, assuring smooth transitioning between screens.
     private func fetchBackgroundImage(){
         guard let bgImagePath = isMovieSelected ? selectedMovie?.poster_path : selectedSeries?.poster_path else{ print("unwrap error"); return }
         ImageService.fetchImage(posterPath: bgImagePath) { poster in
@@ -139,5 +203,58 @@ extension DetailVC{
                 }
             }
         }
+    }
+    
+    // Fetches the series name and ids and updates the genre ids UI depending on the wihch ids does the series or movie has:
+    private func setupGenres(){
+        var selectedGenreNames : [String] = []
+
+        if isMovieSelected {
+            MovieService.fetchMovieGenres { result in
+                switch result{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let genres):
+                    let selectedGenreIds = self.selectedMovie?.genre_ids ?? []
+                    for genre in genres{
+                        for selectedGenre in selectedGenreIds{
+                            if selectedGenre == genre.id{
+                                selectedGenreNames.append(genre.name)
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            TVService.fetchTVGenres { result in
+                switch result{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let genres):
+                    let selectedGenreIds = self.selectedSeries?.genre_ids ?? []
+                    for genre in genres{
+                        for selectedGenre in selectedGenreIds{
+                            if selectedGenre == genre.id{
+                                selectedGenreNames.append(genre.name)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.genres.text = ""
+
+            for genreName in selectedGenreNames{
+                
+                if selectedGenreNames.last == genreName {
+                    self.genres.text! += genreName
+                }else{
+                    self.genres.text! += "\(genreName) / "
+                }
+            }
+        }
+        
     }
 }
