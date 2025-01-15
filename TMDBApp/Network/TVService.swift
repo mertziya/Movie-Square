@@ -68,5 +68,43 @@ class TVService{
         }.resume()
     }
     
+    static func fetchVideoURLOfSeries(series : Series, completion : @escaping (Result<URL,Error>) -> () ){
+        let seriesID = String(describing: series.id ?? 0)
+        guard let url = URL(string: "https://api.themoviedb.org/3/tv/\(seriesID)/videos?api_key=\(GetAPI.apiKey)") else{
+            completion(.failure(ErrorTypes.URLError))
+            return
+        }
+        let request = URLRequest(url: url)
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { data, _, error in
+            if let error = error{
+                completion(.failure(error))
+            }else if let data = data{
+                do{
+                    let videoContainer = try JSONDecoder().decode(VideoContainer.self, from: data)
+                    let allVideos = videoContainer.results
+                    
+                    for video in allVideos{
+                        if video.site == "YouTube" && video.official == true {
+                            guard let url = URL(string: "https://www.youtube.com/watch?v=\(video.key)") else {
+                                completion(.failure(ErrorTypes.URLError))
+                                return
+                            }
+                            print(url.absoluteString)
+                            completion(.success(url))
+                            break
+                        }
+                    }
+                }catch{
+                    completion(.failure(error))
+                }
+            }else{
+                completion(.failure(ErrorTypes.unknownError))
+            }
+        }.resume()
+    }
+    
     
 }

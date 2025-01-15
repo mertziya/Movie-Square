@@ -51,6 +51,8 @@ class DetailVC: UIViewController {
         
         setupUIData() // uploads the data that is responded to the Series or Movies model inside this class.
         
+       
+        
     }
     
     // Gives a gradient background to the image view.
@@ -89,8 +91,10 @@ extension DetailVC{
         ratingView.backgroundColor = .systemBackground
         ratingView.settings.fillMode = .precise
         
-        playButton.alpha = 0.25
-        playButton.addTarget(self, action: #selector(openWeb), for: .touchUpInside)
+        playButton.alpha = 0.35
+        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(openWeb))
+        imageToShow.isUserInteractionEnabled = true
+        imageToShow.addGestureRecognizer(imageTapGesture)
         
         
         // Removes the left bar button item of the navigation controller since another design will be used [According to the design resource]
@@ -115,8 +119,6 @@ extension DetailVC{
     }
     
     @objc private func openWeb(){
-        guard let selectedMovie = selectedMovie else{return}
-
         let webVC = UIViewController()
         webVC.view.backgroundColor = .systemBackground
         
@@ -125,7 +127,9 @@ extension DetailVC{
         webVC.view.addSubview(webView)
         
         if isMovieSelected{
-            MovieService.fetchVideoURLOfMovie(movie: selectedMovie) { result in
+            guard let selectedMovie = selectedMovie else{return}
+            MovieService.fetchVideoURLOfMovie(movie: selectedMovie) { [weak self] result in
+                guard let self = self else { return } // Capture self weakly
                 switch result{
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -137,9 +141,20 @@ extension DetailVC{
                 }
             }
         } else{
-            print("Do the same logic for series")
+            guard let selectedSeries = selectedSeries else{return}
+            TVService.fetchVideoURLOfSeries(series: selectedSeries) { [weak self] result in
+                guard let self = self else { return } // Capture self weakly
+                switch result{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let url):
+                    DispatchQueue.main.async {
+                        webView.load(URLRequest(url: url))
+                        self.present(webVC, animated: true)
+                    }
+                }
+            }
         }
-        
         
     }
     

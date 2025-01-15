@@ -21,19 +21,15 @@ class HomeScreenVC : UIViewController, PageDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Navigation Bar Configuration is set here.
+        setupNav()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(showDetailsVC(_:)), name: .imageTappedNotification, object: nil)
         
         view = homeScreenView
         homeScreenView.tableView.delegate = self
         homeScreenView.tableView.dataSource = self
         homeScreenView.tableView.register(UINib(nibName: "WideMovieCellContainer", bundle: nil), forCellReuseIdentifier: "WideMovieCellContainer")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Navigation Bar Configuration is set here.
-        setupNav()
     }
     
     deinit {
@@ -152,6 +148,7 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         guard let targetCell = self.homeScreenView.tableView.cellForRow(at: IndexPath(row: selectedRow, section: 0)) as? WideMovieCellContainer else {
             return
         }
+        
         targetCell.selectedRow = selectedRow
         targetCell.selectedPage = page
         targetCell.selectedTitle = title
@@ -160,7 +157,6 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         targetCell.sectionHeading.text = sectionHeading
         
         targetCell.isShowingMovies = true
-
         
         MovieService.fetchMovies(title: title, page: page) { result in
             switch result {
@@ -173,12 +169,15 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
     // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF  *** TV SERIES ***
     func updateAndReloadTargetCellTVSeries(title: Title , page : Int , selectedRow: Int, sectionHeading : String?) {
         // Update your data source
         guard let targetCell = self.homeScreenView.tableView.cellForRow(at: IndexPath(row: selectedRow, section: 0)) as? WideMovieCellContainer else {
             return
         }
+        
+       
         targetCell.selectedRow = selectedRow
         targetCell.selectedPage = page
         targetCell.selectedTitle = title
@@ -197,7 +196,6 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
                 targetCell.seriesToShow = series
             }
         }
-        
     }
 
     
