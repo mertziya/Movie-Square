@@ -24,5 +24,4 @@ enum Title : String{
     case onTheAirSeries = "https://api.themoviedb.org/3/tv/on_the_air"
     case popularSeries = "https://api.themoviedb.org/3/tv/popular"
     case topRatedSeries = "https://api.themoviedb.org/3/tv/top_rated"
-    
 }

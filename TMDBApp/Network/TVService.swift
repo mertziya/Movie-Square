@@ -120,7 +120,7 @@ class TVService{
                 // Use DispatchGroup to wait for all async tasks
                 for seriesID in bookmarkedSeriesIDs {
                     dispatchGroup.enter()
-                    guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(seriesID)?api_key=\(GetAPI.apiKey)") else {
+                    guard let url = URL(string: "https://api.themoviedb.org/3/tv/\(seriesID)?api_key=\(GetAPI.apiKey)") else {
                         fetchErrors.append(ErrorTypes.getMovieIDURLerror)
                         dispatchGroup.leave()
                         continue

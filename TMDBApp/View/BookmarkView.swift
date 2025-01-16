@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class SavedMoviesView : UIView {
+class BookmarkView : UIView {
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

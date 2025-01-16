@@ -169,6 +169,7 @@ extension DetailVC{
         // Removes the left bar button item of the navigation controller since another design will be used [According to the design resource]
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
         
+        
         let swipeToExit = UISwipeGestureRecognizer(target: self, action: #selector(viewDidSwipteToRight(_:)))
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(swipeToExit)

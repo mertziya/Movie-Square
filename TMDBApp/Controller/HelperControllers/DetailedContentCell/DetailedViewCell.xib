@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DetailedViewCell" customModule="TMDBApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="276"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="380" height="276"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="solidGray" translatesAutoresizingMaskIntoConstraints="NO" id="fXV-81-xl5">
+                        <rect key="frame" x="0.0" y="0.0" width="182" height="276"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="182" id="wYY-dy-ynx"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookmark.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="b2w-wA-kZB">
+                        <rect key="frame" x="140" y="16.333333333333329" width="28" height="27.666666666666671"/>
+                        <color key="tintColor" systemColor="systemYellowColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="cGf-aS-UbH"/>
+                            <constraint firstAttribute="height" constant="28" id="jBc-uF-0bd"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Title Title Title Title Title Title Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWY-kl-nNJ">
+                        <rect key="frame" x="198" y="4" width="166" height="48"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QK2-0y-3qk" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="230" y="60" width="134" height="30"/>
+                        <color key="backgroundColor" systemColor="systemBrownColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="GUm-rL-Gj0"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="fullstar"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptystar"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genre genre genre genre v" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC5-bb-ojp">
+                        <rect key="frame" x="198" y="106" width="166" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The world's most lethal odd couple - bodyguard Michael Bryce and hitman Darius Kincaid - are back on anoth......" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbC-6Y-Nc4">
+                        <rect key="frame" x="198" y="139" width="166" height="77.666666666666686"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prP-Sl-bzQ">
+                        <rect key="frame" x="198" y="60.000000000000007" width="32" height="26.333333333333336"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KbC-6Y-Nc4" secondAttribute="trailing" constant="16" id="6WW-iR-hXV"/>
+                <constraint firstItem="fXV-81-xl5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Iqq-98-Kyx"/>
+                <constraint firstItem="KbC-6Y-Nc4" firstAttribute="top" secondItem="HC5-bb-ojp" secondAttribute="bottom" constant="16" id="JpQ-E6-kOa"/>
+                <constraint firstItem="QK2-0y-3qk" firstAttribute="leading" secondItem="prP-Sl-bzQ" secondAttribute="trailing" id="KUp-jm-8Ts"/>
+                <constraint firstItem="b2w-wA-kZB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="L1n-ME-DNW"/>
+                <constraint firstAttribute="bottom" secondItem="fXV-81-xl5" secondAttribute="bottom" id="NgU-6m-xXw"/>
+                <constraint firstItem="prP-Sl-bzQ" firstAttribute="leading" secondItem="fXV-81-xl5" secondAttribute="trailing" constant="16" id="O3U-7v-C13"/>
+                <constraint firstItem="KbC-6Y-Nc4" firstAttribute="leading" secondItem="fXV-81-xl5" secondAttribute="trailing" constant="16" id="SEj-6k-6Gg"/>
+                <constraint firstItem="QK2-0y-3qk" firstAttribute="top" secondItem="gWY-kl-nNJ" secondAttribute="bottom" constant="8" id="TLg-fy-GUr"/>
+                <constraint firstItem="gWY-kl-nNJ" firstAttribute="leading" secondItem="fXV-81-xl5" secondAttribute="trailing" constant="16" id="aj6-3M-7lJ"/>
+                <constraint firstItem="b2w-wA-kZB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="140" id="cfA-GO-Tw0"/>
+                <constraint firstAttribute="trailing" secondItem="QK2-0y-3qk" secondAttribute="trailing" constant="16" id="dDi-V0-zGv"/>
+                <constraint firstAttribute="trailing" secondItem="gWY-kl-nNJ" secondAttribute="trailing" constant="16" id="ejS-hV-OsK"/>
+                <constraint firstAttribute="trailing" secondItem="HC5-bb-ojp" secondAttribute="trailing" constant="16" id="f6v-ZC-FHi"/>
+                <constraint firstItem="fXV-81-xl5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fsz-H9-x7a"/>
+                <constraint firstItem="HC5-bb-ojp" firstAttribute="leading" secondItem="fXV-81-xl5" secondAttribute="trailing" constant="16" id="gQw-bk-VrX"/>
+                <constraint firstItem="HC5-bb-ojp" firstAttribute="top" secondItem="QK2-0y-3qk" secondAttribute="bottom" constant="16" id="lC4-hY-p74"/>
+                <constraint firstItem="gWY-kl-nNJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="n1f-an-rov"/>
+                <constraint firstItem="prP-Sl-bzQ" firstAttribute="top" secondItem="gWY-kl-nNJ" secondAttribute="bottom" constant="8" id="oiL-hJ-oOL"/>
+            </constraints>
+            <size key="customSize" width="521" height="332"/>
+            <connections>
+                <outlet property="bookmarkToShow" destination="b2w-wA-kZB" id="QRi-VE-hu2"/>
+                <outlet property="contentImage" destination="fXV-81-xl5" id="ipX-T9-Cd8"/>
+                <outlet property="contentTitle" destination="gWY-kl-nNJ" id="MFy-5G-Gku"/>
+                <outlet property="descriptionLabel" destination="KbC-6Y-Nc4" id="ig7-bf-RLc"/>
+                <outlet property="genreLabel" destination="HC5-bb-ojp" id="bsG-R8-fKS"/>
+                <outlet property="ratingLabel" destination="prP-Sl-bzQ" id="xbb-ED-MGB"/>
+                <outlet property="ratingView" destination="QK2-0y-3qk" id="aLW-bO-595"/>
+            </connections>
+            <point key="canvasLocation" x="488.54961832061065" y="-111.9718309859155"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="bookmark.fill" catalog="system" width="110" height="128"/>
+        <image name="emptystar" width="20" height="20"/>
+        <image name="fullstar" width="20" height="20"/>
+        <image name="solidGray" width="160" height="142"/>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
