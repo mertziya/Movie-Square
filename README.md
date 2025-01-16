@@ -2,11 +2,12 @@
 ![In Progress](https://img.shields.io/badge/Project-In%20Progress-yellow?style=for-the-badge)
 
 ### Current Demo:
+___
 
-![TMDBAppDemo13:01:2025](https://github.com/user-attachments/assets/571da661-8dcb-419e-8762-4558411ca99e)
-
+![TMDBApp](https://github.com/user-attachments/assets/98184f08-950f-452b-9081-09ca5662ff3d)
 
 ### Resources:
+___
 * API Resource:  [themoviedb.org](https://developer.themoviedb.org/reference/intro/getting-started)
 
 * Used APIs: [TMDB Movie Discovery](https://speeding-astronaut-900111.postman.co/workspace/4eaa6ecc-4358-46f7-90ad-f034ccc16295/documentation/26656194-3877c5aa-6c86-49bf-87aa-46552454a95a)
