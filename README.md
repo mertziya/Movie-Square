@@ -1,10 +1,9 @@
 # TMDB Movie Discovery App
-![In Progress](https://img.shields.io/badge/Project-In%20Progress-yellow?style=for-the-badge)
 
 ### Current Demo:
 ___
 
-![TMDBApp](https://github.com/user-attachments/assets/98184f08-950f-452b-9081-09ca5662ff3d)
+![trim 081C965A-59E9-4898-BE5F-D681653683D2-ezgif com-optimize](https://github.com/user-attachments/assets/9bce489b-a73d-4d84-ad7b-e77f6d607db9)
 
 ### Resources:
 ___
