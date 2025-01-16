@@ -12,7 +12,7 @@ import FirebaseCore
 
 class AuthVC: UIViewController, AuthViewDelegate {
     func didTapGoogleLoginButton() {
-        AuthService.shared.signInUsingGoogle(vc: self)
+        FirebaseService.shared.signInUsingGoogle(vc: self)
     }
     
     

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC" customModule="TMDBApp" customModuleProvider="target">
             <connections>
+                <outlet property="bookmarkButton" destination="OQX-oU-Sbo" id="O3a-RQ-tjp"/>
                 <outlet property="detailsDescription" destination="dZ9-Ok-6Ll" id="axk-FY-ZzH"/>
                 <outlet property="downloadButton" destination="S9i-W2-ICZ" id="MfY-K1-6uV"/>
                 <outlet property="genres" destination="uzA-NP-Lat" id="CLo-fs-V7i"/>
@@ -48,21 +49,6 @@
                     </buttonConfiguration>
                     <connections>
                         <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="Bg6-dd-Vqj"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQX-oU-Sbo">
-                    <rect key="frame" x="329" y="80" width="52" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="Qgm-zK-YMy"/>
-                        <constraint firstAttribute="width" constant="52" id="S3a-I8-tNQ"/>
-                    </constraints>
-                    <color key="tintColor" systemColor="labelColor"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="bookmark" catalog="system">
-                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20" scale="large" weight="medium"/>
-                    </buttonConfiguration>
-                    <connections>
-                        <action selector="bookmarkTapped:" destination="-1" eventType="touchUpInside" id="3Vv-nj-13u"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9i-W2-ICZ">
@@ -117,7 +103,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hitman's Wife's Bodyguard" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFr-3F-vef">
-                    <rect key="frame" x="8" y="431" width="381" height="95.666666666666629"/>
+                    <rect key="frame" x="8" y="431" width="325" height="95.666666666666629"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -131,21 +117,31 @@
                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="40" weight="semibold"/>
                     </buttonConfiguration>
                 </button>
+                <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQX-oU-Sbo">
+                    <rect key="frame" x="307" y="446" width="86" height="87"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" systemColor="labelColor"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="bookmark" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="36" scale="large" weight="medium"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="bookmarkTapped:" destination="-1" eventType="touchUpInside" id="3Vv-nj-13u"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ik1-4X-GfU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="6U8-ef-Qg2"/>
-                <constraint firstAttribute="trailing" secondItem="jFr-3F-vef" secondAttribute="trailing" constant="4" id="Ab1-bo-cgb"/>
+                <constraint firstAttribute="trailing" secondItem="jFr-3F-vef" secondAttribute="trailing" constant="60" id="Ab1-bo-cgb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="S9i-W2-ICZ" secondAttribute="trailing" constant="8" id="C7L-hW-kX5"/>
                 <constraint firstItem="b7a-dk-LJ2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="DdF-lG-1MF"/>
                 <constraint firstItem="Vep-vV-EIl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ewg-Lf-Fka"/>
                 <constraint firstItem="9SG-Yi-tKn" firstAttribute="leading" secondItem="b7a-dk-LJ2" secondAttribute="trailing" constant="12" id="Gff-b8-Cmt"/>
-                <constraint firstItem="OQX-oU-Sbo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="I1Y-uy-IhR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Vep-vV-EIl" secondAttribute="trailing" id="RRd-ms-2WK"/>
                 <constraint firstItem="uzA-NP-Lat" firstAttribute="top" secondItem="b7a-dk-LJ2" secondAttribute="bottom" constant="16" id="ZMb-IZ-Ss6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dZ9-Ok-6Ll" secondAttribute="trailing" constant="8" id="bTh-kA-mEN"/>
-                <constraint firstAttribute="trailing" secondItem="OQX-oU-Sbo" secondAttribute="trailing" constant="12" id="dGu-Jz-ipP"/>
                 <constraint firstItem="dZ9-Ok-6Ll" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="dxD-fn-f1P"/>
                 <constraint firstItem="dZ9-Ok-6Ll" firstAttribute="top" secondItem="uzA-NP-Lat" secondAttribute="bottom" constant="12" id="eBL-KS-JeB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="S9i-W2-ICZ" secondAttribute="bottom" constant="16" id="gTu-Cd-4Gr"/>

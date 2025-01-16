@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,19 +35,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NwR-Vm-yKX">
-                        <rect key="frame" x="252" y="0.0" width="48" height="64"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="48" id="WCR-27-Qq9"/>
-                            <constraint firstAttribute="height" constant="64" id="hKg-Vl-Mxk"/>
-                        </constraints>
-                        <color key="tintColor" systemColor="labelColor"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain">
-                            <imageReference key="image" image="bookmark" catalog="system" symbolScale="large" variableValue="0.60000000000000009"/>
-                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large" weight="semibold"/>
-                        </buttonConfiguration>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXc-lj-SFq" customClass="CosmosView" customModule="Cosmos">
                         <rect key="frame" x="44" y="238" width="160" height="24"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,7 +61,6 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="8Rh-Pa-KB9" secondAttribute="trailing" id="4Yh-Hj-7m3"/>
                 <constraint firstItem="lhZ-Zy-fag" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8ar-WB-W5y"/>
-                <constraint firstItem="NwR-Vm-yKX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="H0H-DL-gX0"/>
                 <constraint firstAttribute="bottom" secondItem="nXc-lj-SFq" secondAttribute="bottom" constant="4" id="Lc5-Ng-Zqb"/>
                 <constraint firstAttribute="bottom" secondItem="CJb-1l-x95" secondAttribute="bottom" constant="4" id="Qm2-CJ-GxZ"/>
                 <constraint firstItem="nXc-lj-SFq" firstAttribute="leading" secondItem="CJb-1l-x95" secondAttribute="trailing" constant="12" id="W0y-0k-qfr"/>
@@ -83,7 +68,6 @@
                 <constraint firstItem="lhZ-Zy-fag" firstAttribute="top" secondItem="8Rh-Pa-KB9" secondAttribute="bottom" constant="8" id="cOs-6Y-Isx"/>
                 <constraint firstItem="CJb-1l-x95" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jXw-Hl-UKA"/>
                 <constraint firstItem="8Rh-Pa-KB9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="uCX-wC-rrQ"/>
-                <constraint firstAttribute="trailing" secondItem="NwR-Vm-yKX" secondAttribute="trailing" id="yfC-it-z0w"/>
             </constraints>
             <size key="customSize" width="523" height="295"/>
             <connections>
@@ -92,18 +76,13 @@
                 <outlet property="movieName" destination="lhZ-Zy-fag" id="sTQ-ma-WMo"/>
                 <outlet property="movieRating" destination="CJb-1l-x95" id="UW4-DK-JAg"/>
                 <outlet property="ratingStars" destination="nXc-lj-SFq" id="d1g-mO-IoJ"/>
-                <outlet property="saveMovieButton" destination="NwR-Vm-yKX" id="mvL-KV-2Sd"/>
             </connections>
             <point key="canvasLocation" x="490.07633587786256" y="-36.619718309859159"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="bookmark" catalog="system" width="110" height="128"/>
         <image name="emptystar" width="20" height="20"/>
         <image name="fullstar" width="20" height="20"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

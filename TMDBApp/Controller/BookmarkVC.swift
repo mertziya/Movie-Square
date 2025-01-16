@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-class SavedMoviesVC : UIViewController{
+class BookmarkVC : UIViewController{
     
     var accountView = SavedMoviesView()
     
@@ -17,6 +17,8 @@ class SavedMoviesVC : UIViewController{
         super.viewDidLoad()
         view = accountView
         setupNavigation()
+        
+        
     }
     
     
@@ -48,7 +50,8 @@ class SavedMoviesVC : UIViewController{
         alert.addAction(cancelAction)
         alert.addAction(exitAction)
      
-
+        
+        
         present(alert, animated: true)
     }
     

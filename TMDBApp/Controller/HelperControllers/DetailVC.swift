@@ -10,11 +10,18 @@ import WebKit
 import Cosmos
 
 class DetailVC: UIViewController {
+    
     // MARK: - Properties:
     var selectedMovie : Movie?
     var selectedSeries : Series?
     var isMovieSelected = true
     
+    var isBookmarked = false // will be used to initialize the value of the movie being bookmarked or not
+                             // Also it will be used for whether removing from the bookmark, or just adding to bookmark.
+    
+    
+    // checkIfBookmarked(movie : completion: Bool) // on completion it returns true if the movie is in the bookmarks
+    // according to the boolean value whether the movie is bookmarked or not update the data on the ViewDidload
     
     // MARK: - UI Elements:
     
@@ -22,8 +29,69 @@ class DetailVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func bookmarkTapped(_ sender: UIButton) {
-        print("bookmarked")
+        if isMovieSelected{
+            guard let selectedMovie = selectedMovie else{return}
+            if !isBookmarked{
+                FirebaseService.shared.addMovieToBookmark(movie: selectedMovie) { error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }else{
+                        DispatchQueue.main.async {
+                            self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                            self.bookmarkButton.tintColor = .systemYellow
+                            self.isBookmarked = true
+                            Animations.showBookmarkAnimation(vc: self, isBookmarked: true , isMovies: true)
+                        }
+                    }
+                }
+            }else{
+                FirebaseService.shared.deleteMovieFromBookmarks(with: selectedMovie) { error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }else{
+                        DispatchQueue.main.async {
+                            self.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+                            self.bookmarkButton.tintColor = .label
+                            self.isBookmarked = false
+                            Animations.showBookmarkAnimation(vc: self, isBookmarked: false , isMovies: true)
+                        }
+                    }
+                }
+            }
+           
+        }else{
+            guard let selectedSeries = selectedSeries else{return}
+            if !isBookmarked{
+                FirebaseService.shared.addSeriesToBookmark(series: selectedSeries) { error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }else{
+                        DispatchQueue.main.async{
+                            self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                            self.bookmarkButton.tintColor = .systemYellow
+                            self.isBookmarked = true
+                            Animations.showBookmarkAnimation(vc: self, isBookmarked: true , isMovies: false)
+                        }
+                    }
+                }
+            }else{
+                FirebaseService.shared.deleteSeriesFromBookmarks(with: selectedSeries) { error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }else{
+                        DispatchQueue.main.async {
+                            self.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+                            self.bookmarkButton.tintColor = .label
+                            self.isBookmarked = false
+                            Animations.showBookmarkAnimation(vc: self, isBookmarked: false , isMovies: false)
+                        }
+                    }
+                }
+            }
+        }
     }
+    @IBOutlet weak var bookmarkButton: UIButton!
+    
     
     
     @IBOutlet weak var imageToShow: UIImageView!
@@ -49,9 +117,9 @@ class DetailVC: UIViewController {
         
         setupUI() // For extra UI Configurations that couldn't be handled with XIB File
         
-        setupUIData() // uploads the data that is responded to the Series or Movies model inside this class.
+        setupBookmark() // Setup the initial bookmark image according whether the movie OR TV is bookmarked or not.
         
-       
+        setupUIData() // uploads the data that is responded to the Series or Movies model inside this class.
         
     }
     
@@ -95,6 +163,7 @@ extension DetailVC{
         let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(openWeb))
         imageToShow.isUserInteractionEnabled = true
         imageToShow.addGestureRecognizer(imageTapGesture)
+        playButton.addTarget(self, action: #selector(openWeb), for: .touchUpInside)
         
         
         // Removes the left bar button item of the navigation controller since another design will be used [According to the design resource]
@@ -189,6 +258,7 @@ extension DetailVC{
         imageUploadIndicator.translatesAutoresizingMaskIntoConstraints = false
         imageToShow.translatesAutoresizingMaskIntoConstraints = false
         playButton.translatesAutoresizingMaskIntoConstraints = false
+        bookmarkButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageUploadIndicator.centerXAnchor.constraint(equalTo: imageToShow.centerXAnchor),
             imageUploadIndicator.centerYAnchor.constraint(equalTo: imageToShow.centerYAnchor),
@@ -198,6 +268,10 @@ extension DetailVC{
             playButton.centerXAnchor.constraint(equalTo: imageToShow.centerXAnchor),
             playButton.centerYAnchor.constraint(equalTo: imageToShow.centerYAnchor),
             
+            bookmarkButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            bookmarkButton.bottomAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 0),
+            bookmarkButton.leftAnchor.constraint(equalTo: mainTitle.rightAnchor, constant: 0),
+            bookmarkButton.heightAnchor.constraint(equalToConstant: 60),
         ])
     }
 }
@@ -206,6 +280,46 @@ extension DetailVC{
 
 // MARK: - Network Calls:
 extension DetailVC{
+    
+    private func setupBookmark(){
+        if isMovieSelected{
+            guard let selectedMovie = selectedMovie else{return}
+            FirebaseService.shared.checkIfBookmarkedMovie(movie: selectedMovie) { result in
+                switch result{
+                case .failure(let error): print(error.localizedDescription)
+                case .success(let isBookmarked):
+                    DispatchQueue.main.async {
+                        if isBookmarked{
+                            self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                            self.bookmarkButton.tintColor = .systemYellow
+                            self.isBookmarked = true
+                        }else{
+                            self.isBookmarked = false
+                        }
+                    }
+                
+                }
+            }
+        }else{
+            guard let selectedSeries = selectedSeries else{return}
+            FirebaseService.shared.checkIfBookmarkedSeries(series: selectedSeries) { result in
+                switch result{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let isBookmarked):
+                    DispatchQueue.main.async {
+                        if isBookmarked{
+                            self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                            self.bookmarkButton.tintColor = .systemYellow
+                            self.isBookmarked = true
+                        }else{
+                            self.isBookmarked = false
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     // sets the background image after fetching the image is completed, assuring smooth transitioning between screens.
     private func fetchBackgroundImage(){

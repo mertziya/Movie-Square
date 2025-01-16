@@ -25,7 +25,7 @@ class TabVC : UITabBarController{
         let movieSearchVC = MovieSearchVC()
         movieSearchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         
-        let accountVC = SavedMoviesVC()
+        let accountVC = BookmarkVC()
         let accountVCNav = UINavigationController(rootViewController: accountVC)
         accountVCNav.tabBarItem = UITabBarItem(title: "Bookmarks", image: UIImage(systemName: "bookmark"), tag: 3)
         accountVCNav.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")

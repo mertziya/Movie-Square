@@ -21,6 +21,7 @@ class HomeScreenVC : UIViewController, PageDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         // Navigation Bar Configuration is set here.
         setupNav()
         
@@ -244,6 +245,7 @@ extension HomeScreenVC{
                 self.updateAndReloadTargetCell(title: .topRated, page: 1, selectedRow: 2, sectionHeading: "Top Rated")
                 self.updateAndReloadTargetCell(title: .upcoming, page: 1, selectedRow: 3, sectionHeading: "Upcoming")
                 
+                self.homeScreenView.tableView.contentOffset = CGPoint(x: 0, y: -100) // When the user selects changes the type of content from the navbar it resets the scrolling offset of the tableView
                 
             }
         }
@@ -257,6 +259,7 @@ extension HomeScreenVC{
                 self.updateAndReloadTargetCellTVSeries(title: .topRatedSeries, page: 1, selectedRow: 2, sectionHeading: "Top Rated")
                 self.updateAndReloadTargetCellTVSeries(title: .popularSeries, page: 1, selectedRow: 3, sectionHeading: "Popular")
                
+                self.homeScreenView.tableView.contentOffset = CGPoint(x: 0, y: -100) // When the user selects changes the type of content from the navbar it resets the scrolling offset of the tableView
                 
             }
         }

@@ -20,6 +20,9 @@
 		C62826362D3733B300AA7762 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62826352D3733B300AA7762 /* Enums.swift */; };
 		C62826382D37D07700AA7762 /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62826372D37D07700AA7762 /* Videos.swift */; };
 		C628263A2D37E41B00AA7762 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62826392D37E41B00AA7762 /* Launch.storyboard */; };
+		C628263C2D3805AA00AA7762 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C628263B2D3805AA00AA7762 /* FirebaseFirestore */; };
+		C628263E2D384AD000AA7762 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628263D2D384AD000AA7762 /* Protocols.swift */; };
+		C62826402D387C4F00AA7762 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628263F2D387C4F00AA7762 /* Bookmark.swift */; };
 		C64486102D34050400E1CEA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64486092D34050400E1CEA5 /* Assets.xcassets */; };
 		C64486132D34050400E1CEA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486082D34050400E1CEA5 /* AppDelegate.swift */; };
 		C64486142D34050400E1CEA5 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644860A2D34050400E1CEA5 /* AuthVC.swift */; };
@@ -34,7 +37,7 @@
 		C644862E2D34157600E1CEA5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C644862D2D34157600E1CEA5 /* GoogleSignIn */; };
 		C64486302D34157600E1CEA5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C644862F2D34157600E1CEA5 /* GoogleSignInSwift */; };
 		C64486322D34243000E1CEA5 /* SavedMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486312D34243000E1CEA5 /* SavedMoviesView.swift */; };
-		C64486342D34243500E1CEA5 /* SavedMoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486332D34243500E1CEA5 /* SavedMoviesVC.swift */; };
+		C64486342D34243500E1CEA5 /* BookmarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486332D34243500E1CEA5 /* BookmarkVC.swift */; };
 		C644863A2D3438BF00E1CEA5 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486392D3438BF00E1CEA5 /* HomeScreenVC.swift */; };
 		C644863C2D3438D100E1CEA5 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644863B2D3438D100E1CEA5 /* HomeScreenView.swift */; };
 		C644863E2D3440BA00E1CEA5 /* DiscoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644863D2D3440BA00E1CEA5 /* DiscoverVC.swift */; };
@@ -45,9 +48,10 @@
 		C644864C2D344C0100E1CEA5 /* TallMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486492D344C0100E1CEA5 /* TallMovieCell.swift */; };
 		C6BBFD722D352A8B006CC04E /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = C6BBFD712D352A8B006CC04E /* Cosmos */; };
 		C6C16C0B2D35342A00450068 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C16C0A2D35342A00450068 /* Movie.swift */; };
-		C6C16C0D2D35363C00450068 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C16C0C2D35363C00450068 /* AuthService.swift */; };
+		C6C16C0D2D35363C00450068 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C16C0C2D35363C00450068 /* FirebaseService.swift */; };
 		C6C16C112D353A7D00450068 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6C16C102D353A7D00450068 /* Secrets.plist */; };
 		C6C16C152D355BA400450068 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C16C142D355BA400450068 /* ImageService.swift */; };
+		C6ECEB832D390CB30096E1E1 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6ECEB822D390CB30096E1E1 /* Animations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,8 @@
 		C62826352D3733B300AA7762 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C62826372D37D07700AA7762 /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
 		C62826392D37E41B00AA7762 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		C628263D2D384AD000AA7762 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		C628263F2D387C4F00AA7762 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		C64485F02D34042C00E1CEA5 /* TMDBApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMDBApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64486082D34050400E1CEA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C64486092D34050400E1CEA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,7 +82,7 @@
 		C64486232D34078400E1CEA5 /* TabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabVC.swift; sourceTree = "<group>"; };
 		C644862A2D34149B00E1CEA5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C64486312D34243000E1CEA5 /* SavedMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMoviesView.swift; sourceTree = "<group>"; };
-		C64486332D34243500E1CEA5 /* SavedMoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMoviesVC.swift; sourceTree = "<group>"; };
+		C64486332D34243500E1CEA5 /* BookmarkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkVC.swift; sourceTree = "<group>"; };
 		C64486392D3438BF00E1CEA5 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		C644863B2D3438D100E1CEA5 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		C644863D2D3440BA00E1CEA5 /* DiscoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverVC.swift; sourceTree = "<group>"; };
@@ -86,9 +92,10 @@
 		C64486492D344C0100E1CEA5 /* TallMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallMovieCell.swift; sourceTree = "<group>"; };
 		C644864A2D344C0100E1CEA5 /* TallMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TallMovieCell.xib; sourceTree = "<group>"; };
 		C6C16C0A2D35342A00450068 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		C6C16C0C2D35363C00450068 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		C6C16C0C2D35363C00450068 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		C6C16C102D353A7D00450068 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		C6C16C142D355BA400450068 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		C6ECEB822D390CB30096E1E1 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +108,7 @@
 				C64486272D34142600E1CEA5 /* FirebaseAuth in Frameworks */,
 				C644862E2D34157600E1CEA5 /* GoogleSignIn in Frameworks */,
 				C64486302D34157600E1CEA5 /* GoogleSignInSwift in Frameworks */,
+				C628263C2D3805AA00AA7762 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +141,8 @@
 				C628261C2D36D5C800AA7762 /* Notifications.swift */,
 				C628262D2D37252B00AA7762 /* GetAPI.swift */,
 				C62826352D3733B300AA7762 /* Enums.swift */,
+				C628263D2D384AD000AA7762 /* Protocols.swift */,
+				C6ECEB822D390CB30096E1E1 /* Animations.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -175,6 +185,7 @@
 				C6C16C0A2D35342A00450068 /* Movie.swift */,
 				C62826132D369D8400AA7762 /* Series.swift */,
 				C62826372D37D07700AA7762 /* Videos.swift */,
+				C628263F2D387C4F00AA7762 /* Bookmark.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,7 +208,7 @@
 				C644860A2D34050400E1CEA5 /* AuthVC.swift */,
 				C64486392D3438BF00E1CEA5 /* HomeScreenVC.swift */,
 				C64486212D34076800E1CEA5 /* MovieSearchVC.swift */,
-				C64486332D34243500E1CEA5 /* SavedMoviesVC.swift */,
+				C64486332D34243500E1CEA5 /* BookmarkVC.swift */,
 				C644863D2D3440BA00E1CEA5 /* DiscoverVC.swift */,
 				C64486232D34078400E1CEA5 /* TabVC.swift */,
 				C64486412D34475300E1CEA5 /* HelperControllers */,
@@ -236,7 +247,7 @@
 		C64486202D3406E700E1CEA5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C6C16C0C2D35363C00450068 /* AuthService.swift */,
+				C6C16C0C2D35363C00450068 /* FirebaseService.swift */,
 				C6C16C142D355BA400450068 /* ImageService.swift */,
 				C62826312D37338300AA7762 /* MovieService.swift */,
 				C62826332D37339300AA7762 /* TVService.swift */,
@@ -277,6 +288,7 @@
 				C644862D2D34157600E1CEA5 /* GoogleSignIn */,
 				C644862F2D34157600E1CEA5 /* GoogleSignInSwift */,
 				C6BBFD712D352A8B006CC04E /* Cosmos */,
+				C628263B2D3805AA00AA7762 /* FirebaseFirestore */,
 			);
 			productName = TMDBApp;
 			productReference = C64485F02D34042C00E1CEA5 /* TMDBApp.app */;
@@ -348,7 +360,8 @@
 				C64486402D34437600E1CEA5 /* DiscoverView.swift in Sources */,
 				C644861F2D3406DD00E1CEA5 /* MovieSearchView.swift in Sources */,
 				C64486132D34050400E1CEA5 /* AppDelegate.swift in Sources */,
-				C6C16C0D2D35363C00450068 /* AuthService.swift in Sources */,
+				C6C16C0D2D35363C00450068 /* FirebaseService.swift in Sources */,
+				C62826402D387C4F00AA7762 /* Bookmark.swift in Sources */,
 				C61030F62D348D35001C0F3D /* WideMovieCellContainer.swift in Sources */,
 				C62826322D37338300AA7762 /* MovieService.swift in Sources */,
 				C64486242D34078400E1CEA5 /* TabVC.swift in Sources */,
@@ -359,6 +372,7 @@
 				C64486322D34243000E1CEA5 /* SavedMoviesView.swift in Sources */,
 				C64486222D34076800E1CEA5 /* MovieSearchVC.swift in Sources */,
 				C644863C2D3438D100E1CEA5 /* HomeScreenView.swift in Sources */,
+				C6ECEB832D390CB30096E1E1 /* Animations.swift in Sources */,
 				C644861D2D3405D700E1CEA5 /* AuthView.swift in Sources */,
 				C62826362D3733B300AA7762 /* Enums.swift in Sources */,
 				C62826382D37D07700AA7762 /* Videos.swift in Sources */,
@@ -368,8 +382,9 @@
 				C62826342D37339300AA7762 /* TVService.swift in Sources */,
 				C628262E2D37252B00AA7762 /* GetAPI.swift in Sources */,
 				C64486152D34050400E1CEA5 /* SceneDelegate.swift in Sources */,
+				C628263E2D384AD000AA7762 /* Protocols.swift in Sources */,
 				C628262A2D36FD2500AA7762 /* DetailVC.swift in Sources */,
-				C64486342D34243500E1CEA5 /* SavedMoviesVC.swift in Sources */,
+				C64486342D34243500E1CEA5 /* BookmarkVC.swift in Sources */,
 				C644863E2D3440BA00E1CEA5 /* DiscoverVC.swift in Sources */,
 				C6C16C0B2D35342A00450068 /* Movie.swift in Sources */,
 			);
@@ -608,6 +623,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C628263B2D3805AA00AA7762 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestore;
+		};
 		C64486262D34142600E1CEA5 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C64486252D34142600E1CEA5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

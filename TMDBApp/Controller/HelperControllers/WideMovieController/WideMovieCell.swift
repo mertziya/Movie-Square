@@ -9,19 +9,17 @@ import UIKit
 import Cosmos
 
 
-class WideMovieCell: UICollectionViewCell {
+class WideMovieCell: UICollectionViewCell{
     
     // MARK: - Properties:
     var selectedMovie : Movie?
     var selectedSeries : Series?
     var isMovieSelected = true
-    
-    
+        
     // MARK: - UI Configurations:
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var movieRating: UILabel!
-    @IBOutlet weak var saveMovieButton: UIButton!
     @IBOutlet weak var ratingStars: CosmosView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
@@ -30,13 +28,12 @@ class WideMovieCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+                
         
         movieImage.layer.cornerRadius = 16
         movieImage.contentMode = .scaleAspectFill
         movieImage.clipsToBounds = true
-        
-        saveMovieButton.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
-        
+                
         let imageLongPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(imageLongPressed(_:)))
         imageLongPressGesture.minimumPressDuration = 0.4
         
@@ -47,15 +44,32 @@ class WideMovieCell: UICollectionViewCell {
         movieImage.addGestureRecognizer(imageLongPressGesture)
         
         ratingStars.settings.fillMode = .precise
-        
-        
+       
         
         indicatorConstraints()
         
     }
     
     @objc private func bookmarkTapped(){
-        print("bookmark tapped")
+        if isMovieSelected{
+            guard let selectedMovie = selectedMovie else{return}
+            FirebaseService.shared.addMovieToBookmark(movie: selectedMovie) { error in
+                if let error = error{
+                    print(error.localizedDescription)
+                }else{
+                    print("bookmarked Movies")
+                }
+            }
+        }else{
+            guard let selectedSeries = selectedSeries else{return}
+            FirebaseService.shared.addSeriesToBookmark(series: selectedSeries) { error in
+                if let error = error{
+                    print(error.localizedDescription)
+                }else{
+                    print("bookmarked Series")
+                }
+            }
+        }
     }
 
     @objc private func imageLongPressed(_ longpress: UILongPressGestureRecognizer){
@@ -97,6 +111,10 @@ class WideMovieCell: UICollectionViewCell {
             indicator.centerYAnchor.constraint(equalTo: movieImage.centerYAnchor),
         ])
     }
-    
-    
 }
+
+//
+//if issBookmarked{
+//    self.saveMovieButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+//    self.saveMovieButton.tintColor = .systemYellow
+//}

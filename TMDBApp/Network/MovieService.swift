@@ -108,5 +108,60 @@ class MovieService{
         }.resume()
     }
     
+    static func fetchBookmarkedMovies(completion: @escaping (Result<[Movie], Error>) -> ()) {
+        var returningMovies: [Movie] = []
+        let session = URLSession.shared
+        let dispatchGroup = DispatchGroup()
+        var fetchErrors: [Error] = []
+
+        FirebaseService.shared.fetchAllBookmarkedMovieIDS { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let bookmarkedMovieIDs):
+                // Use DispatchGroup to wait for all async tasks
+                for movieID in bookmarkedMovieIDs {
+                    dispatchGroup.enter()
+                    guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)?api_key=\(GetAPI.apiKey)") else {
+                        fetchErrors.append(ErrorTypes.getMovieIDURLerror)
+                        dispatchGroup.leave()
+                        continue
+                    }
+
+                    session.dataTask(with: URLRequest(url: url)) { data, _, error in
+                        defer { dispatchGroup.leave() } // Ensure dispatchGroup.leave() is always called
+
+                        if let error = error {
+                            fetchErrors.append(error)
+                        } else if let data = data {
+                            do {
+                                let movie = try JSONDecoder().decode(Movie.self, from: data)
+                                // Ensure thread-safe access to the array
+                                DispatchQueue.main.sync {
+                                    returningMovies.append(movie)
+                                }
+                            } catch {
+                                fetchErrors.append(error)
+                            }
+                        } else {
+                            fetchErrors.append(ErrorTypes.unknownError)
+                        }
+                    }.resume()
+                }
+
+                // Wait for all tasks to complete
+                dispatchGroup.notify(queue: .main) {
+                    if !fetchErrors.isEmpty && returningMovies.isEmpty {
+                        // If there are errors and no successful movies, return failure
+                        completion(.failure(fetchErrors.first!))
+                    } else {
+                        // Otherwise, return the successful movies
+                        completion(.success(returningMovies))
+                    }
+                }
+            }
+        }
+    }
+    
     
 }

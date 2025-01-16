@@ -98,28 +98,31 @@ extension WideMovieCellContainer{
             print("DEBUG: Now playing Dequeue Error")
             return UICollectionViewCell()
         }
+        
 
         let title : String?
         let averageVote : Double?
         let backdropPath : String?
         if isShowingMovies{
-            cell.selectedMovie = moviesToShow[indexPath.row]
-            cell.isMovieSelected = true
+            DispatchQueue.main.async {
+                cell.selectedMovie = self.moviesToShow[indexPath.row]
+                cell.isMovieSelected = true
+            }
             
             title = moviesToShow[indexPath.row].title
             averageVote = moviesToShow[indexPath.row].vote_average
             backdropPath = moviesToShow[indexPath.row].backdrop_path
+            
         } else {
-            cell.selectedSeries = seriesToShow[indexPath.row]
-            cell.isMovieSelected = false
+            DispatchQueue.main.async {
+                cell.selectedSeries = self.seriesToShow[indexPath.row]
+                cell.isMovieSelected = false
+            }
             
             title = seriesToShow[indexPath.row].name
             averageVote = seriesToShow[indexPath.row].vote_average
             backdropPath = seriesToShow[indexPath.row].backdrop_path
         }
-        
-        
-        
         
         // All the cell data is shown after the image is uploaded
         if let unwrapped_poster_path = backdropPath{
@@ -134,14 +137,12 @@ extension WideMovieCellContainer{
                     // Since there is 5 stars, and all vote_avatage is evaluated up to 10 points the score is divided by 2.
                     cell.movieRating.text = String(format: "%.1f", (averageVote ?? 0) / 2)
                     cell.ratingStars.rating = ((averageVote ?? 0) / 2)
-
                 }
             }
         }else{
             cell.indicator.stopAnimating()
             cell.movieImage.image = UIImage.solidGray
         }
-        
         
         return cell
     }

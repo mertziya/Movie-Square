@@ -10,6 +10,8 @@ import Foundation
 enum ErrorTypes: Error{
     case URLError
     case unknownError
+    case firebaseUserError
+    case getMovieIDURLerror
 }
 
 enum Title : String{
