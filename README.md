@@ -1,4 +1,7 @@
+<img src="https://github.com/user-attachments/assets/9905c3eb-9004-443d-a07d-46071e025126" alt="Description of the image" width="40" height="40">
+
 # TMDB Movie Discovery App
+
 
 ### Demo of the App Functionality:
 ___
