@@ -18,21 +18,18 @@ class TabVC : UITabBarController{
         homeScreenNav.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         homeScreenNav.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         
-        let discover = DiscoverVC()
-        discover.tabBarItem = UITabBarItem(title: "Discover", image: UIImage(systemName: "safari"), tag: 1)
-        discover.tabBarItem.selectedImage = UIImage(systemName: "safari.fill")
-        
-        let movieSearchVC = MovieSearchVC()
-        movieSearchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
+        let movieSearchVC = SearchVC()
+        let searchNav = UINavigationController(rootViewController: movieSearchVC)
+        searchNav.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
         let accountVC = BookmarkVC()
         let accountVCNav = UINavigationController(rootViewController: accountVC)
-        accountVCNav.tabBarItem = UITabBarItem(title: "Bookmarks", image: UIImage(systemName: "bookmark"), tag: 3)
+        accountVCNav.tabBarItem = UITabBarItem(title: "Bookmarks", image: UIImage(systemName: "bookmark"), tag: 2)
         accountVCNav.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
         
         
         
-        self.viewControllers = [homeScreenNav , discover , movieSearchVC, accountVCNav]
+        self.viewControllers = [homeScreenNav , searchNav, accountVCNav]
         self.tabBar.tintColor = .systemYellow
         
         let appearance = UITabBarAppearance()

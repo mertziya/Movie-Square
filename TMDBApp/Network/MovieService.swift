@@ -163,5 +163,65 @@ class MovieService{
         }
     }
     
+    static func fetchMoviesWithGenreids(ids : [Int] , completion: @escaping (Result<[Movie],Error>) -> () ){
+        
+        var textToQuery = ""
+        for id in ids{
+            textToQuery += String(id) + ","
+        }
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=\(GetAPI.apiKey)&with_genres=\(textToQuery)") else{
+            completion(.failure(ErrorTypes.URLError))
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { data, _, error in
+            if let error = error{
+                completion(.failure(error))
+                return
+            }else if let data = data{
+                do{
+                    let moviesContainer = try JSONDecoder().decode(MovieContainer.self, from: data)
+                    let movies = moviesContainer.results
+                    completion(.success(movies))
+                }catch{
+                    completion(.failure(error))
+                }
+            }else{
+                completion(.failure(ErrorTypes.responseError))
+            }
+        }.resume()
+    }
+    
+    
+    static func fetchMovieWith(query: String , completion: @escaping (Result<[Movie],Error>) -> ()){
+        guard let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=\(GetAPI.apiKey)&query=\(query)") else {
+            completion(.failure(ErrorTypes.URLError))
+            return
+        }
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error{
+                completion(.failure(error))
+                return
+            }else if let data = data{
+                do{
+                    let container = try JSONDecoder().decode(MovieContainer.self, from: data)
+                    let movies = container.results
+                    completion(.success(movies))
+                }catch{
+                    
+                }
+            }else{
+                completion(.failure(ErrorTypes.responseError))
+            }
+        }.resume()
+    }
+    
     
 }

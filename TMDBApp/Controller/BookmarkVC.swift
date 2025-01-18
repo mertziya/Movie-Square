@@ -22,20 +22,19 @@ class BookmarkVC : UIViewController{
             }
         }
     }
+    var hasReloadedData = true // Flag to ensure reload happens only once
     
     var bookmarkedMovies : [Movie] = []
     var bookmarkedSeries : [Series] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchbookmarkedMovies() // Initially fetches the bookmarked movies
+        
         setupCollectionView()
 
         setupNavigation()
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        fetchbookmarkedMovies() // Initially fetches the bookmarked movies
     }
     
     
@@ -127,6 +126,19 @@ extension BookmarkVC : UICollectionViewDelegate , UICollectionViewDataSource{
         vc.modalPresentationStyle = .overFullScreen
         
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == collectionView{
+            let offsetY = scrollView.contentOffset.y
+            if offsetY < -250 && hasReloadedData{
+                hasReloadedData = false
+                isMovieSelected ? fetchbookmarkedMovies() : fetchbookmarkedSeries()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0){
+                    self.hasReloadedData = true
+                }
+            }
+        }
     }
     
     private func setupCollectionView(){

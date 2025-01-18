@@ -161,4 +161,60 @@ class TVService{
         }
     }
     
+    
+    static func fetchSeriesWith(genreids : [Int] , completion : @escaping (Result<[Series],Error>) -> () ){
+        var queryText = ""
+        for id in genreids{queryText += String(id) + ","}
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/tv?api_key=\(GetAPI.apiKey)&with_genres=\(queryText)") else{
+            completion(.failure(ErrorTypes.URLError))
+            return
+        }
+        print(url.absoluteString)
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error{
+                completion(.failure(error))
+            }else if let data = data{
+                do{
+                    let seriesContainer = try JSONDecoder().decode(SeriesContainer.self, from: data)
+                    let series = seriesContainer.results
+                    completion(.success(series))
+                }catch{
+                    completion(.failure(error))
+                }
+            }else{
+                completion(.failure(ErrorTypes.responseError))
+            }
+        }.resume()
+    }
+    
+    
+    static func fetchSeriesWith(query : String , completion: @escaping (Result<[Series],Error>) -> () ){
+        guard let url = URL(string: "https://api.themoviedb.org/3/search/tv?api_key=\(GetAPI.apiKey)&query=\(query)") else{
+            completion(.failure(ErrorTypes.URLError))
+            return
+        }
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error{
+                completion(.failure(error))
+                return
+            }else if let data = data{
+                do{
+                    let container = try JSONDecoder().decode(SeriesContainer.self, from: data)
+                    let series = container.results
+                    completion(.success(series))
+                }catch{
+                    
+                }
+            }else{
+                completion(.failure(ErrorTypes.URLError))
+            }
+        }.resume()
+    }
+    
+    
 }
