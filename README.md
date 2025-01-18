@@ -3,12 +3,18 @@
 ### Demo of the App Functionality:
 ___
 
+#### Overview Demo:
 
-![Description](https://www.dropbox.com/scl/fi/4g0k4oux2llnqlua7mea3/authGif.GIF?rlkey=71x0ghhklxym9qhavcs2atyq8&st=yubi1ihq&raw=1)
+![overviewGIFF](https://github.com/user-attachments/assets/dc5fbf5a-105e-4d88-b442-b84f8e2ee78e)
 
 
-### Demo of the Authentication Functionality:
+#### Authentication Demo:
 
+![authGif](https://github.com/user-attachments/assets/b899cbfe-783b-43ec-a8bd-0e5e53ab64b4)
+
+
+* [Overview Demo Video](https://www.dropbox.com/scl/fi/k62ioysej5uxmt0rb6nj2/ProjectOverviewDemo.mp4?rlkey=a9mmxkkqmjn8o3obccgogud2t&st=kbzcl48s&dl=0)
+* [Authentication Demo Video](https://www.dropbox.com/scl/fi/jteooo8so466htgd8aot0/AuthenticationDemo.MP4?rlkey=gky109k9exjqe1w0jw27nqsay&st=5dg9u8sj&dl=0)
 
 
 ### Resources:
@@ -33,8 +39,7 @@ ___
 
 * [CosmosView](https://github.com/evgenyneu/Cosmos) for showing the rating values visually by using stars.
 
-### Full Demo Videos:
-___
 
+_Note_: MVC used for architecture but MVVM would be better, since MVC increased the code complexity of the controllers later on the projcet.
 
 
