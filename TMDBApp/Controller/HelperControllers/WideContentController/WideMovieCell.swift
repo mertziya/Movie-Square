@@ -49,34 +49,12 @@ class WideMovieCell: UICollectionViewCell{
         indicatorConstraints()
         
     }
-    
-    @objc private func bookmarkTapped(){
-        if isMovieSelected{
-            guard let selectedMovie = selectedMovie else{return}
-            FirebaseService.shared.addMovieToBookmark(movie: selectedMovie) { error in
-                if let error = error{
-                    print(error.localizedDescription)
-                }else{
-                    print("bookmarked Movies")
-                }
-            }
-        }else{
-            guard let selectedSeries = selectedSeries else{return}
-            FirebaseService.shared.addSeriesToBookmark(series: selectedSeries) { error in
-                if let error = error{
-                    print(error.localizedDescription)
-                }else{
-                    print("bookmarked Series")
-                }
-            }
-        }
-    }
 
     @objc private func imageLongPressed(_ longpress: UILongPressGestureRecognizer){
         switch longpress.state{
         case .began:
             movieImage.alpha = 0.5
-        case .changed, .ended, .cancelled, .failed:
+        case .ended:
             movieImage.alpha = 1.0
             if isMovieSelected{
                 guard let selectedMovie = selectedMovie else{return}

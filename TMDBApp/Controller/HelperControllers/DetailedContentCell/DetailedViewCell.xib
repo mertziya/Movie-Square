@@ -37,7 +37,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QK2-0y-3qk" customClass="CosmosView" customModule="Cosmos">
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QK2-0y-3qk" customClass="CosmosView" customModule="Cosmos">
                         <rect key="frame" x="230" y="60" width="134" height="30"/>
                         <color key="backgroundColor" systemColor="systemBrownColor"/>
                         <constraints>

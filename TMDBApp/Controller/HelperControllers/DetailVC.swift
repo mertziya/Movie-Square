@@ -154,6 +154,7 @@ extension DetailVC{
         downloadButton.layer.cornerRadius = 8
         // Set up button for touch events
         downloadButton.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
+        downloadButton.addTarget(self, action: #selector(buttonDragged), for: .touchDragOutside)
         downloadButton.addTarget(self, action: #selector(buttonTouchUp), for: [.touchUpInside, .touchUpOutside])
         
         ratingView.backgroundColor = .systemBackground
@@ -179,8 +180,12 @@ extension DetailVC{
     @objc private func buttonTouchDown(){
         downloadButton.alpha = 0.5 // Higlighted state
     }
+    @objc private func buttonDragged(){
+        downloadButton.alpha = 1.0
+    }
     @objc private func buttonTouchUp(){
         downloadButton.alpha = 1.0 // Normal State
+        openWeb()
     }
     
     @objc private func viewDidSwipteToRight(_ gesture : UISwipeGestureRecognizer){
@@ -202,7 +207,11 @@ extension DetailVC{
                 guard let self = self else { return } // Capture self weakly
                 switch result{
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    if error as! ErrorTypes == ErrorTypes.noVideoSource{
+                        DispatchQueue.main.async {
+                            Alerts.showAlert(vc: self.self, _title: "No Video", _message: "No Video Source has found!")
+                        }
+                    }
                 case .success(let url):
                     DispatchQueue.main.async {
                         webView.load(URLRequest(url: url))
@@ -216,7 +225,11 @@ extension DetailVC{
                 guard let self = self else { return } // Capture self weakly
                 switch result{
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    if error as! ErrorTypes == ErrorTypes.noVideoSource{
+                        DispatchQueue.main.async {
+                            Alerts.showAlert(vc: self.self, _title: "No Video", _message: "No Video Source has found!")
+                        }
+                    }
                 case .success(let url):
                     DispatchQueue.main.async {
                         webView.load(URLRequest(url: url))

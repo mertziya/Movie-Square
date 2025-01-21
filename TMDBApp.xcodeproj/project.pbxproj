@@ -43,6 +43,7 @@
 		C64486482D344BF000E1CEA5 /* WideMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486452D344BF000E1CEA5 /* WideMovieCell.swift */; };
 		C644864B2D344C0100E1CEA5 /* TallMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C644864A2D344C0100E1CEA5 /* TallMovieCell.xib */; };
 		C644864C2D344C0100E1CEA5 /* TallMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486492D344C0100E1CEA5 /* TallMovieCell.swift */; };
+		C65F38C92D3ED0FF003C8BDC /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65F38C82D3ED0FF003C8BDC /* Alerts.swift */; };
 		C6BBFD722D352A8B006CC04E /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = C6BBFD712D352A8B006CC04E /* Cosmos */; };
 		C6C16C0B2D35342A00450068 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C16C0A2D35342A00450068 /* Movie.swift */; };
 		C6C16C0D2D35363C00450068 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C16C0C2D35363C00450068 /* FirebaseService.swift */; };
@@ -88,6 +89,7 @@
 		C64486462D344BF000E1CEA5 /* WideMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WideMovieCell.xib; sourceTree = "<group>"; };
 		C64486492D344C0100E1CEA5 /* TallMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallMovieCell.swift; sourceTree = "<group>"; };
 		C644864A2D344C0100E1CEA5 /* TallMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TallMovieCell.xib; sourceTree = "<group>"; };
+		C65F38C82D3ED0FF003C8BDC /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		C6C16C0A2D35342A00450068 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C6C16C0C2D35363C00450068 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		C6C16C102D353A7D00450068 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				C62826352D3733B300AA7762 /* Enums.swift */,
 				C628263D2D384AD000AA7762 /* Protocols.swift */,
 				C6ECEB822D390CB30096E1E1 /* Animations.swift */,
+				C65F38C82D3ED0FF003C8BDC /* Alerts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				C644863A2D3438BF00E1CEA5 /* HomeScreenVC.swift in Sources */,
 				C62826302D37296B00AA7762 /* Genre.swift in Sources */,
 				C64486142D34050400E1CEA5 /* AuthVC.swift in Sources */,
+				C65F38C92D3ED0FF003C8BDC /* Alerts.swift in Sources */,
 				C64486322D34243000E1CEA5 /* BookmarkView.swift in Sources */,
 				C64486222D34076800E1CEA5 /* SearchVC.swift in Sources */,
 				C644863C2D3438D100E1CEA5 /* HomeScreenView.swift in Sources */,
@@ -408,14 +412,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J4QF7K26GP;
+				DEVELOPMENT_TEAM = DU4MNZ89TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TMDBApp/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Movie Square";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Launch.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,14 +441,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J4QF7K26GP;
+				DEVELOPMENT_TEAM = DU4MNZ89TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TMDBApp/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Movie Square";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Launch.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

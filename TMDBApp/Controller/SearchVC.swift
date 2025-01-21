@@ -10,6 +10,7 @@ import UIKit
 
 class SearchVC : UIViewController{
     
+    var selectedIndexPathForSlider : [IndexPath] = []
     
     let searchBar = UITextField()
     
@@ -105,6 +106,7 @@ class SearchVC : UIViewController{
 // MARK: - Actions:
 extension SearchVC{
     @objc private func didChangeContent(){
+        searchBar.text = ""
         genreIdsToSearch = []
         isMovieSelected = isMovieSelected ? false : true
         isMovieSelected ? fetchMovieAndGenres() : fetchSeriesAndGenres()
@@ -125,7 +127,6 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
         if collectionView == contentSlider{
             return currentGenres.count
         }else if collectionView == contentCollectionView{
-            print(fetchedMovieContent.count)
             return isMovieSelected ? fetchedMovieContent.count : fetchedSeriesContent.count
         }
         
@@ -185,7 +186,6 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
             genreIdsToSearch.append(currentGenres[indexPath.row].id)
         }
         else if collectionView == contentCollectionView{
-            print("hellonigger")
             
             let vc = DetailVC()
             vc.isMovieSelected = self.isMovieSelected
@@ -206,11 +206,30 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
             genreIdsToSearch = updatedgenres
         }
     }
+    private func deselectAllItems(in collectionView: UICollectionView) {
+        // Get all selected index paths
+        guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
+        
+        for indexPath in selectedIndexPaths {
+            // Deselect the item
+            collectionView.deselectItem(at: indexPath, animated: false)
+            
+            // Optionally reset the cell's appearance if needed
+            if let cell = collectionView.cellForItem(at: indexPath) as? SliderCell {
+                cell.backgroundColor = #colorLiteral(red: 0.1647058725, green: 0.1647058725, blue: 0.1647058725, alpha: 1)
+                cell.label.textColor = .white
+            }
+            
+            // Remove the genre from your tracking array
+            let updatedgenres = genreIdsToSearch.filter { $0 != currentGenres[indexPath.row].id }
+            genreIdsToSearch = updatedgenres
+        }
+    }
     
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         if collectionView == contentSlider{
             let text = currentGenres[indexPath.row].name.uppercased() // Replace with your actual button text source
             
@@ -222,13 +241,17 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
             return CGSize(width: textWidth + 32, height: 25) // Adjust height as needed
         }
         else{
-            return CGSize(width: 180, height: 360)
+            return CGSize(width: 180, height: 360) // Fixed item size
         }
     }
     
+    
+    
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("searched")
         isSearchedContent = true
+        deselectAllItems(in: contentSlider)
         if isMovieSelected{
             MovieService.fetchMovieWith(query: textField.text ?? "") { result in
                 switch result{
@@ -250,6 +273,14 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
         }
         textField.resignFirstResponder() // dismiss the keyboard
         return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == searchBar{
+            UIView.animate(withDuration: 0.4) {
+                self.contentSlider.contentOffset = CGPoint(x: 0, y: 0)
+                self.contentCollectionView.contentOffset = CGPoint(x: 0, y: 0)
+            }
+        }
     }
     
 
@@ -285,7 +316,11 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
         // Add the button to the container view
         closeButton.frame = CGRect(x: padding, y: padding, width: closeButton.intrinsicContentSize.width, height: closeButton.intrinsicContentSize.height)
         containerView.addSubview(closeButton)
+        
         closeButton.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
+        containerView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        containerView.addGestureRecognizer(tapGesture)
         
 
         // Set the container as the rightView of the search bar
@@ -332,6 +367,13 @@ extension SearchVC : UITextFieldDelegate , UICollectionViewDelegate , UICollecti
         layoutForContent.minimumLineSpacing = 50
         layoutForContent.minimumInteritemSpacing = 0
         
+        // Guarentees that the items inside each row is positioned well inside its row.
+        let itemEachRow = Int(view.bounds.width) / 180
+        let coveredSpace = 180 * itemEachRow
+        let emptySpace = Int(view.bounds.width) - coveredSpace
+        let quarterOfVoid = CGFloat(emptySpace / 4)
+        layoutForContent.sectionInset = UIEdgeInsets(top: 10, left: quarterOfVoid, bottom: 20, right: quarterOfVoid)
+  
         // Content Collection View Config:
         contentCollectionView.delegate = self
         contentCollectionView.dataSource = self

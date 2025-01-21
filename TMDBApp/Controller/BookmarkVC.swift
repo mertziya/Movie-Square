@@ -185,6 +185,7 @@ extension BookmarkVC : UICollectionViewDelegate , UICollectionViewDataSource{
 // MARK: - Network Calls:
 extension BookmarkVC{
     private func fetchbookmarkedMovies(){
+        if self.collectionView != nil { collectionView.isHidden = true } // Ensures to skip this operation if the data is initially fetching
         loadingView.startAnimating()
         MovieService.fetchBookmarkedMovies { result in
             switch result{
@@ -195,11 +196,13 @@ extension BookmarkVC{
                 self.isMovieSelected = true
                 self.barbtnButton.setTitle("Movies", for: .normal)
                 self.loadingView.stopAnimating()
+                if self.collectionView != nil { self.collectionView.isHidden = false }
             }
         }
     }
     
     private func fetchbookmarkedSeries(){
+        collectionView.isHidden = true
         loadingView.startAnimating()
         TVService.fetchBookmarkedSeries { result in
             switch result{
@@ -210,6 +213,7 @@ extension BookmarkVC{
                 self.isMovieSelected = false
                 self.barbtnButton.setTitle("TV", for: .normal)
                 self.loadingView.stopAnimating()
+                self.collectionView.isHidden = false
             }
         }
     }

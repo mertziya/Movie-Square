@@ -97,6 +97,7 @@ class TVService{
                             break
                         }
                     }
+                    completion(.failure(ErrorTypes.noVideoSource))
                 }catch{
                     completion(.failure(error))
                 }

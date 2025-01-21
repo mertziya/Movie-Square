@@ -13,6 +13,7 @@ enum ErrorTypes: Error{
     case getMovieIDURLerror
     case responseError
     case unknownError
+    case noVideoSource
 }
 
 enum Title : String{

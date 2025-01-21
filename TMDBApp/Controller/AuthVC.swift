@@ -20,6 +20,7 @@ class AuthVC: UIViewController, AuthViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        authView.vc = self
         view = authView
         authView.delegate = self
     }

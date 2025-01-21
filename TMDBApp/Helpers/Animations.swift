@@ -52,8 +52,8 @@ class Animations{
         let fadeAnimation = CABasicAnimation(keyPath: "opacity")
         fadeAnimation.fromValue = 1
         fadeAnimation.toValue = 0
-        fadeAnimation.beginTime = 1.6
-        fadeAnimation.duration = 0.4
+        fadeAnimation.beginTime = 0
+        fadeAnimation.duration = 0
         fadeAnimation.fillMode = .forwards
         fadeAnimation.isRemovedOnCompletion = false
         
@@ -62,12 +62,12 @@ class Animations{
         let delayAnimation = CABasicAnimation(keyPath: "opacity")
         delayAnimation.fromValue = 1.0
         delayAnimation.toValue = 1.0
-        delayAnimation.duration = 2.0
+        delayAnimation.duration = 1.0
 
         // Group the animations
         let animationGroup = CAAnimationGroup()
         animationGroup.animations = [delayAnimation, fadeAnimation]
-        animationGroup.duration = 2.0 // Total duration (2 seconds delay + 0.4 seconds fade-out)
+        animationGroup.duration = 1.0 // Total duration (2 seconds delay + 0.4 seconds fade-out)
         animationGroup.fillMode = .forwards
         animationGroup.isRemovedOnCompletion = false
 

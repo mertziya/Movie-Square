@@ -99,6 +99,7 @@ class MovieService{
                             break
                         }
                     }
+                    completion(.failure(ErrorTypes.noVideoSource))
                 }catch{
                     completion(.failure(error))
                 }

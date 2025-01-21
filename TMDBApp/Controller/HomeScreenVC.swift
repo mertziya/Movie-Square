@@ -13,14 +13,55 @@ class HomeScreenVC : UIViewController, PageDelegate{
     
     // Properties:
     let homeScreenView = HomeScreenView()
-    var isMoviesPresenting = true
     
+    var isMoviesPresenting = true
+    var isChangingPage = false
+    var selectedIndexPath = IndexPath()
+    
+    var fetchedMovies : [[Movie]] = [[],[],[],[]]{
+        didSet{
+            DispatchQueue.main.async {
+                if self.isChangingPage {
+                    self.homeScreenView.tableView.reloadRows(at: [self.selectedIndexPath], with: .automatic)
+                    self.isChangingPage = false
+                }else{
+                    self.homeScreenView.tableView.reloadData()
+                }
+            }
+        }
+    }
+    var fetchedSeries : [[Series]] = [[],[],[],[]]{
+        didSet{
+            DispatchQueue.main.async {
+                if self.isChangingPage {
+                    self.homeScreenView.tableView.reloadRows(at: [self.selectedIndexPath], with: .automatic)
+                    self.isChangingPage = false
+                }else{
+                    self.homeScreenView.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    var theSelectedPageIndexOne = 1
+    var theSelectedPageIndexTwo = 1
+    var theSelectedPageIndexThree = 1
+    var theSelectedPageIndexFour = 1
+
  
     
     // Lifecycles:
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchContent(indexRow: 0)
+
+        fetchContent(indexRow: 1)
+
+        fetchContent(indexRow: 2)
+
+        fetchContent(indexRow: 3)
+
         
         // Navigation Bar Configuration is set here.
         setupNav()
@@ -38,11 +79,26 @@ class HomeScreenVC : UIViewController, PageDelegate{
     }
     
     // Delegates:
-    func didChangePage(selectedPage: Int?, selectedTitle: Title?, row: Int? , selectedHeading: String?) {
-        if isMoviesPresenting{
-            updateAndReloadTargetCell(title: selectedTitle!, page: selectedPage!, selectedRow: row! , sectionHeading: selectedHeading)
-        }else{
-            updateAndReloadTargetCellTVSeries(title: selectedTitle!, page: selectedPage!, selectedRow: row! , sectionHeading: selectedHeading)
+    func didChangePage(selectedPage page: Int?, selectedTitle: Title?, row: Int? , selectedHeading: String?) {
+        self.isChangingPage = true
+        if let row = row, let page = page{
+            self.selectedIndexPath = IndexPath(row: row, section: .zero)
+            switch row{
+            case 0:
+                self.theSelectedPageIndexOne = page
+                fetchContent(indexRow: row)
+            case 1:
+                self.theSelectedPageIndexTwo = page
+                fetchContent(indexRow: row)
+            case 2:
+                self.theSelectedPageIndexThree = page
+                fetchContent(indexRow: row)
+            case 3:
+                self.theSelectedPageIndexFour = page
+                fetchContent(indexRow: row)
+            default:
+                return
+            }
         }
     }
     
@@ -76,128 +132,99 @@ extension HomeScreenVC : UITableViewDelegate, UITableViewDataSource {
         }
         cell.delegate = self
         
-        if indexPath.row == 0{
-            MovieService.fetchMovies(title: .nowPlaying, page: 1) { result in
-                switch result{
-                case .failure(let error):       print(error.localizedDescription)
-                case .success(let movies):      cell.moviesToShow = movies
-                }
-            }
-            // For communicating between the Wide Movie Container, this part is crucial.
-            cell.selectedPage = 1
-            cell.selectedTitle = .nowPlaying
+    
+        
+        switch indexPath.row{
+        case 0:
+            
+            if isMoviesPresenting{cell.moviesToShow = self.fetchedMovies[0] ; cell.isShowingMovies = true}
+            if !isMoviesPresenting{cell.seriesToShow = self.fetchedSeries[0] ; cell.isShowingMovies = false}
+            cell.selectedPage = theSelectedPageIndexOne
+            cell.selectedTitle = isMoviesPresenting ? .nowPlaying : .onTheAirSeries
             cell.selectedRow = 0
-            cell.sectionHeading.text = "Now Playing"
-            cell.selectedHeadingText = "Now Playing"
-        }
-        
-        if indexPath.row == 1{
-            MovieService.fetchMovies(title: .popular, page: 1) { result in
-                switch result{
-                case .failure(let error):       print(error.localizedDescription)
-                case .success(let movies):      cell.moviesToShow = movies
-                }
-            }
-            cell.selectedPage = 1
-            cell.selectedTitle = .popular
+            cell.sectionHeading.text = isMoviesPresenting ? "Now Playing" : "On The Air"
+            cell.selectedHeadingText = isMoviesPresenting ? "Now Playing" : "On The Air"
+            
+        case 1:
+            
+            if isMoviesPresenting{cell.moviesToShow = self.fetchedMovies[1] ; cell.isShowingMovies = true}
+            if !isMoviesPresenting{cell.seriesToShow = self.fetchedSeries[1] ; cell.isShowingMovies = false}
+            cell.selectedPage = theSelectedPageIndexTwo
+            cell.selectedTitle = isMoviesPresenting ? .popular : .airingTodaySeries
             cell.selectedRow = 1
-            cell.sectionHeading.text = "Popular"
-            cell.selectedHeadingText = "Popular"
-        }
-        
-        if indexPath.row == 2{
-            MovieService.fetchMovies(title: .topRated, page: 1) { result in
-                switch result{
-                case .failure(let error):       print(error.localizedDescription)
-                case .success(let movies):
-                    cell.moviesToShow = movies
-                }
-            }
-            cell.selectedPage = 1
-            cell.selectedTitle = .topRated
+            cell.sectionHeading.text = isMoviesPresenting ? "Popular" : "Airing Today"
+            cell.selectedHeadingText = isMoviesPresenting ? "Popular" : "Airing Today"
+            
+        case 2:
+            
+            if isMoviesPresenting{cell.moviesToShow = self.fetchedMovies[2] ; cell.isShowingMovies = true}
+            if !isMoviesPresenting{cell.seriesToShow = self.fetchedSeries[2] ; cell.isShowingMovies = false}
+            cell.selectedPage = theSelectedPageIndexThree
+            cell.selectedTitle = isMoviesPresenting ? .topRated : .topRatedSeries
             cell.selectedRow = 2
-            cell.sectionHeading.text = "Top Rated"
-            cell.selectedHeadingText = "Top Rated"
-
-        }
-        
-        if indexPath.row == 3{
-            MovieService.fetchMovies(title: .upcoming, page: 1) { result in
-                switch result{
-                case .failure(let error):       print(error.localizedDescription)
-                case .success(let movies):      cell.moviesToShow = movies;
-                }
-            }
-            cell.selectedPage = 1
-            cell.selectedTitle = .upcoming
+            cell.sectionHeading.text = isMoviesPresenting ? "Top Rated" : "Top Rated"
+            cell.selectedHeadingText = isMoviesPresenting ? "Top Rated" : "Top Rated"
+            
+        case 3:
+            
+            if isMoviesPresenting{cell.moviesToShow = self.fetchedMovies[3] ; cell.isShowingMovies = true}
+            if !isMoviesPresenting{cell.seriesToShow = self.fetchedSeries[3] ; cell.isShowingMovies = false}
+            cell.selectedPage = theSelectedPageIndexFour
+            cell.selectedTitle = isMoviesPresenting ? .upcoming : .popularSeries
             cell.selectedRow = 3
-            cell.sectionHeading.text = "Upcoming"
-            cell.selectedHeadingText = "Upcoming"
+            cell.sectionHeading.text = isMoviesPresenting ? "Upcoming" : "Popular"
+            cell.selectedHeadingText = isMoviesPresenting ? "Upcoming" : "Popular"
+            
+        default: return UITableViewCell()
         }
-        
+       
         return cell
     }
+    
+    private func fetchContent(indexRow : Int){
+        var title : Title
+        var pageNumber : Int
+        switch indexRow{
+        case 0:
+            title = isMoviesPresenting ? .nowPlaying : .onTheAirSeries
+            pageNumber = theSelectedPageIndexOne
+        case 1:
+            title = isMoviesPresenting ? .popular : .airingTodaySeries
+            pageNumber = theSelectedPageIndexTwo
+        case 2:
+            title = isMoviesPresenting ? .topRated : .topRatedSeries
+            pageNumber = theSelectedPageIndexThree
+        case 3:
+            title = isMoviesPresenting ? .upcoming : .popularSeries
+            pageNumber = theSelectedPageIndexFour
+        default:
+            return
+        }
+        if isMoviesPresenting{
+            MovieService.fetchMovies(title: title, page: pageNumber) { result in
+                switch result{
+                case .failure(let error):       print(error.localizedDescription)
+                case .success(let movies):      self.fetchedMovies[indexRow] = movies;
+                }
+            }
+        }else{
+            TVService.fetchSeries(title: title, page: pageNumber) { result in
+                switch result{
+                case .failure(let error): print(error.localizedDescription)
+                case .success(let series): self.fetchedSeries[indexRow] = series
+                }
+            }
+        }
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 360
     }
     
     
-    // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF *** MOVIES ***
-    func updateAndReloadTargetCell(title: Title , page : Int , selectedRow: Int, sectionHeading : String?) {
-        // Update your data source
-        guard let targetCell = self.homeScreenView.tableView.cellForRow(at: IndexPath(row: selectedRow, section: 0)) as? WideMovieCellContainer else {
-            return
-        }
-        
-        targetCell.selectedRow = selectedRow
-        targetCell.selectedPage = page
-        targetCell.selectedTitle = title
     
-        targetCell.selectedHeadingText = sectionHeading
-        targetCell.sectionHeading.text = sectionHeading
-        
-        targetCell.isShowingMovies = true
-        
-        MovieService.fetchMovies(title: title, page: page) { result in
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let movies):
-                targetCell.moviesToShow = movies
-            }
-        }
-        
-    }
-    
-    
-    // UPDATES THE SELECTED ROW WITH THE GIVEN PARAMTERS OF  *** TV SERIES ***
-    func updateAndReloadTargetCellTVSeries(title: Title , page : Int , selectedRow: Int, sectionHeading : String?) {
-        // Update your data source
-        guard let targetCell = self.homeScreenView.tableView.cellForRow(at: IndexPath(row: selectedRow, section: 0)) as? WideMovieCellContainer else {
-            return
-        }
-        
-       
-        targetCell.selectedRow = selectedRow
-        targetCell.selectedPage = page
-        targetCell.selectedTitle = title
-        
-        targetCell.selectedHeadingText = sectionHeading
-        targetCell.sectionHeading.text = sectionHeading
-        
-        targetCell.isShowingMovies = false
-
-        
-        TVService.fetchSeries(title: title, page: page) { result in
-            switch result{
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let series):
-                targetCell.seriesToShow = series
-            }
-        }
-    }
 
     
 }
@@ -240,10 +267,15 @@ extension HomeScreenVC{
                 button.setTitle("  Movies", for: .normal)
                 self.isMoviesPresenting = true
                 
-                self.updateAndReloadTargetCell(title: .nowPlaying, page: 1, selectedRow: 0, sectionHeading: "Now Playing")
-                self.updateAndReloadTargetCell(title: .popular, page: 1, selectedRow: 1, sectionHeading: "Popular")
-                self.updateAndReloadTargetCell(title: .topRated, page: 1, selectedRow: 2, sectionHeading: "Top Rated")
-                self.updateAndReloadTargetCell(title: .upcoming, page: 1, selectedRow: 3, sectionHeading: "Upcoming")
+                self.theSelectedPageIndexOne = 1
+                self.theSelectedPageIndexTwo = 1
+                self.theSelectedPageIndexThree = 1
+                self.theSelectedPageIndexFour = 1
+                
+                self.fetchContent(indexRow: 0)
+                self.fetchContent(indexRow: 1)
+                self.fetchContent(indexRow: 2)
+                self.fetchContent(indexRow: 3)
                 
                 self.homeScreenView.tableView.contentOffset = CGPoint(x: 0, y: -100) // When the user selects changes the type of content from the navbar it resets the scrolling offset of the tableView
                 
@@ -254,10 +286,17 @@ extension HomeScreenVC{
                 button.setTitle("  Series", for: .normal)
                 self.isMoviesPresenting = false
                 
-                self.updateAndReloadTargetCellTVSeries(title: .onTheAirSeries, page: 1, selectedRow: 0, sectionHeading: "On The Air")
-                self.updateAndReloadTargetCellTVSeries(title: .airingTodaySeries, page: 1, selectedRow: 1, sectionHeading: "Airing Today")
-                self.updateAndReloadTargetCellTVSeries(title: .topRatedSeries, page: 1, selectedRow: 2, sectionHeading: "Top Rated")
-                self.updateAndReloadTargetCellTVSeries(title: .popularSeries, page: 1, selectedRow: 3, sectionHeading: "Popular")
+                self.theSelectedPageIndexOne = 1
+                self.theSelectedPageIndexTwo = 1
+                self.theSelectedPageIndexThree = 1
+                self.theSelectedPageIndexFour = 1
+                
+                self.fetchContent(indexRow: 0)
+                self.fetchContent(indexRow: 1)
+                self.fetchContent(indexRow: 2)
+                self.fetchContent(indexRow: 3)
+                
+                print(self.fetchedSeries[0].count)
                
                 self.homeScreenView.tableView.contentOffset = CGPoint(x: 0, y: -100) // When the user selects changes the type of content from the navbar it resets the scrolling offset of the tableView
                 
