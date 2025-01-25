@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let isSignedIn = Auth.auth().currentUser != nil
-        window.rootViewController = isSignedIn ? TabVC() : AuthVC()
+        window.rootViewController = isSignedIn ? TabVC() : UINavigationController(rootViewController: AuthVC())
         window.makeKeyAndVisible()
         self.window = window
     }

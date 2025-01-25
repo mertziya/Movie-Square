@@ -29,12 +29,18 @@ class BookmarkVC : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchbookmarkedMovies() // Initially fetches the bookmarked movies
         
         setupCollectionView()
 
         setupNavigation()
         
+    }
+    
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchbookmarkedMovies() // Inıtially fetches the data and reloads it at each time screen appears
     }
     
     
@@ -82,7 +88,7 @@ class BookmarkVC : UIViewController{
         let exitAction = UIAlertAction(title: "Exit", style: .destructive) { alert in
             do{
                 try Auth.auth().signOut()
-                let authVC = AuthVC()
+                let authVC = UINavigationController(rootViewController: AuthVC())
                 authVC.modalPresentationStyle = .fullScreen
                 self.present(authVC, animated: true)
             }catch{

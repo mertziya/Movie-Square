@@ -23,6 +23,7 @@
 		C628263C2D3805AA00AA7762 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C628263B2D3805AA00AA7762 /* FirebaseFirestore */; };
 		C628263E2D384AD000AA7762 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628263D2D384AD000AA7762 /* Protocols.swift */; };
 		C62826402D387C4F00AA7762 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628263F2D387C4F00AA7762 /* Bookmark.swift */; };
+		C6327FE72D446E7B0069D67B /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6327FE62D446E7B0069D67B /* RegisterView.swift */; };
 		C64486102D34050400E1CEA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64486092D34050400E1CEA5 /* Assets.xcassets */; };
 		C64486132D34050400E1CEA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64486082D34050400E1CEA5 /* AppDelegate.swift */; };
 		C64486142D34050400E1CEA5 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644860A2D34050400E1CEA5 /* AuthVC.swift */; };
@@ -71,6 +72,7 @@
 		C62826392D37E41B00AA7762 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C628263D2D384AD000AA7762 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		C628263F2D387C4F00AA7762 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		C6327FE62D446E7B0069D67B /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		C64485F02D34042C00E1CEA5 /* TMDBApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMDBApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64486082D34050400E1CEA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C64486092D34050400E1CEA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		C6C16C0C2D35363C00450068 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		C6C16C102D353A7D00450068 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		C6C16C142D355BA400450068 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		C6CC2D022D43AD0300A3D2B7 /* TMDBAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TMDBAppRelease.entitlements; sourceTree = "<group>"; };
 		C6ECEB822D390CB30096E1E1 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		C6ECEB852D3932790096E1E1 /* DetailedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewCell.swift; sourceTree = "<group>"; };
 		C6ECEB862D3932790096E1E1 /* DetailedViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedViewCell.xib; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 		C644860F2D34050400E1CEA5 /* TMDBApp */ = {
 			isa = PBXGroup;
 			children = (
+				C6CC2D022D43AD0300A3D2B7 /* TMDBAppRelease.entitlements */,
 				C628261B2D36D5BF00AA7762 /* Helpers */,
 				C644861B2D34053800E1CEA5 /* Resources */,
 				C644861A2D34052F00E1CEA5 /* App */,
@@ -200,6 +204,7 @@
 				C644863B2D3438D100E1CEA5 /* HomeScreenView.swift */,
 				C64486312D34243000E1CEA5 /* BookmarkView.swift */,
 				C6ECEB892D3A90330096E1E1 /* SliderCell.swift */,
+				C6327FE62D446E7B0069D67B /* RegisterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 				C64486142D34050400E1CEA5 /* AuthVC.swift in Sources */,
 				C65F38C92D3ED0FF003C8BDC /* Alerts.swift in Sources */,
 				C64486322D34243000E1CEA5 /* BookmarkView.swift in Sources */,
+				C6327FE72D446E7B0069D67B /* RegisterView.swift in Sources */,
 				C64486222D34076800E1CEA5 /* SearchVC.swift in Sources */,
 				C644863C2D3438D100E1CEA5 /* HomeScreenView.swift in Sources */,
 				C6ECEB832D390CB30096E1E1 /* Animations.swift in Sources */,
@@ -410,17 +416,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DU4MNZ89TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TMDBApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Movie Square";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Launch.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,17 +449,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = TMDBApp/TMDBAppRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DU4MNZ89TN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TMDBApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Movie Square";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Launch.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

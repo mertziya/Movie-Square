@@ -57,6 +57,33 @@ class FirebaseService{
         }
     }
     
+
+    func createUser(email: String, password: String , completion: @escaping (Error?) -> ()) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                print("Error creating user: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            if let user = authResult?.user {
+                completion(nil)
+            }
+        }
+    }
+    
+    func signUserInWithemail(email : String , password: String , completion : @escaping (Error?) -> () ){
+        Auth.auth().signIn(withEmail: email, password: password) { res, error in
+            if let error = error{
+                completion(error)
+            }else if let res = res{
+               completion(nil)
+            }
+        }
+    }
+    
+    
+    
     func createUserInFirestore(user: User){
         let firestore = Firestore.firestore()
         let users = firestore.collection("users")
