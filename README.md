@@ -1,23 +1,15 @@
 <img src="https://github.com/user-attachments/assets/9905c3eb-9004-443d-a07d-46071e025126" alt="Description of the image" width="40" height="40">
 
-# TMDB Movie Discovery App
+# Movie Square App
 
 
-### Demo of the App Functionality:
-___
 
-#### Overview Demo:
+### Overview Demo:
+[Demo Video](https://www.dropbox.com/scl/fi/juxrylbx1ezeqg0jrhrrk/MovieSqaureDemo.mp4?rlkey=jfv6apn4ndqyt1n8uo8to727j&st=20bsohqp&raw=1)
 
-![overviewGIFF](https://github.com/user-attachments/assets/dc5fbf5a-105e-4d88-b442-b84f8e2ee78e)
-
-
-#### Authentication Demo:
-
-![authGif](https://github.com/user-attachments/assets/b899cbfe-783b-43ec-a8bd-0e5e53ab64b4)
+![Movie_Square_OverviewDemo](https://github.com/user-attachments/assets/5572fc27-9e32-4e35-afe2-da2c708fc75a)
 
 
-* [Overview Demo Video](https://www.dropbox.com/scl/fi/k62ioysej5uxmt0rb6nj2/ProjectOverviewDemo.mp4?rlkey=a9mmxkkqmjn8o3obccgogud2t&st=kbzcl48s&dl=0)
-* [Authentication Demo Video](https://www.dropbox.com/scl/fi/jteooo8so466htgd8aot0/AuthenticationDemo.MP4?rlkey=gky109k9exjqe1w0jw27nqsay&st=5dg9u8sj&dl=0)
 
 
 ### Resources:
@@ -38,11 +30,9 @@ ___
 
 * [GoogleSignIn](https://github.com/google/GoogleSignIn-iOS) is used for authenticate the user with the google account.
 
-* [irebaseFirestore](https://github.com/firebase/firebase-ios-sdk) is used for storing the saved movies and TV Series of each user.
+* [FirebaseFirestore](https://github.com/firebase/firebase-ios-sdk) is used for storing the saved movies and TV Series of each user.
 
 * [CosmosView](https://github.com/evgenyneu/Cosmos) for showing the rating values visually by using stars.
 
-
-_Note_: MVC used for architecture but MVVM would be better, since MVC increased the code complexity of the controllers later on the projcet.
-
+- Currently on AppStore App Review
 
