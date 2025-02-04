@@ -36,3 +36,4 @@ ___
 
 - Currently on AppStore App Review
 
+See the app on [AppStore](https://apps.apple.com/tr/app/movie-square/id6740776576)
