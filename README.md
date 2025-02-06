@@ -34,6 +34,5 @@ ___
 
 * [CosmosView](https://github.com/evgenyneu/Cosmos) for showing the rating values visually by using stars.
 
-- Currently on AppStore App Review
 
 See the app on [AppStore](https://apps.apple.com/tr/app/movie-square/id6740776576)
