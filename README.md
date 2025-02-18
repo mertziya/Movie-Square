@@ -1,15 +1,6 @@
-<img src="https://github.com/user-attachments/assets/9905c3eb-9004-443d-a07d-46071e025126" alt="Description of the image" width="40" height="40">
 
-# Movie Square App
-
-
-
-### Overview Demo:
-[Demo Video](https://www.dropbox.com/scl/fi/juxrylbx1ezeqg0jrhrrk/MovieSqaureDemo.mp4?rlkey=jfv6apn4ndqyt1n8uo8to727j&st=20bsohqp&raw=1)
-
-![Movie_Square_OverviewDemo](https://github.com/user-attachments/assets/5572fc27-9e32-4e35-afe2-da2c708fc75a)
-
-
+# Movie Square
+[![App Store](https://img.shields.io/badge/App%20Store-blue?style=flat&logo=app-store&logoColor=white)](https://apps.apple.com/tr/developer/mert-ziya/id1791576075)
 
 
 ### Resources:
@@ -21,7 +12,7 @@ ___
 
 * Inspired from the design:  [Movies discovery mobile app (ytsXmovies) (Community)](https://www.figma.com/design/Lpx27TcthaJlnmf4PL0gK5/Movies-discovery-mobile-app-(ytsXmovies)-(Community)?node-id=0-1&p=f&t=bP9ug2Wh0AZ3RQjo-0)
 
-
+ 
 
 ### Third Party Libraries:
 ___
@@ -33,6 +24,9 @@ ___
 * [FirebaseFirestore](https://github.com/firebase/firebase-ios-sdk) is used for storing the saved movies and TV Series of each user.
 
 * [CosmosView](https://github.com/evgenyneu/Cosmos) for showing the rating values visually by using stars.
+  
 
+### Overview Demo:
+[Demo Video](https://www.dropbox.com/scl/fi/juxrylbx1ezeqg0jrhrrk/MovieSqaureDemo.mp4?rlkey=jfv6apn4ndqyt1n8uo8to727j&st=20bsohqp&raw=1)
 
-See the app on [AppStore](https://apps.apple.com/tr/app/movie-square/id6740776576)
+![Movie_Square_OverviewDemo](https://github.com/user-attachments/assets/5572fc27-9e32-4e35-afe2-da2c708fc75a)
