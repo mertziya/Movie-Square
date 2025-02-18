@@ -1,6 +1,6 @@
 
 # Movie Square
-[![App Store](https://img.shields.io/badge/App%20Store-blue?style=flat&logo=app-store&logoColor=white)](https://apps.apple.com/tr/developer/mert-ziya/id1791576075)
+[![App Store](https://img.shields.io/badge/App%20Store-blue?style=flat&logo=app-store&logoColor=white)](https://apps.apple.com/tr/app/movie-square/id6740776576)
 
 
 ### Resources:
